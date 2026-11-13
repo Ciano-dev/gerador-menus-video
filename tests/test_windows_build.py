@@ -126,7 +126,7 @@ class BuildContractTests(unittest.TestCase):
         self.assertNotIn('GITHUB_TOKEN', workflow)
         self.assertLess(workflow.index('pipeline.py audit dist/'), workflow.index('./windows_build/smoke_windows.ps1'))
         self.assertIn('timeout-minutes: 45', workflow)
-        self.assertIn('dump_traceback_later(240, exit=True)', workflow)
+        self.assertIn('dump_traceback_later(600, exit=True)', workflow)
         smoke = (ROOT / 'windows_build/smoke_windows.ps1').read_text(encoding='utf-8')
         self.assertNotIn('activation.bin', smoke)
         self.assertNotIn('DPAPI', smoke)

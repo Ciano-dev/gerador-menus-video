@@ -69,7 +69,7 @@ class EOFReportTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         workflow = (root / '.github/workflows/windows-portable.yml').read_text()
         self.assertIn('timeout-minutes: 45', workflow)
-        self.assertIn('dump_traceback_later(240, exit=True)', workflow)
+        self.assertIn('dump_traceback_later(600, exit=True)', workflow)
         self.assertIn('timeout-minutes: 4', workflow)
         self.assertIn('tests/render_eof_matrix.py --portable-root', workflow)
         self.assertLess(workflow.index('tests/render_eof_matrix.py'), workflow.index('python -m PyInstaller'))

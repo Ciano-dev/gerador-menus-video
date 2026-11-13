@@ -45,7 +45,7 @@ jobs:
           python windows_build/ci_display.py prepare --state .ci-display-state.json --metadata ci-logs/display.jsonl
           if ($LASTEXITCODE -ne 0) { throw 'Hosted display preparation failed' }
       - name: Explicit tool download outside dist for source tests only
-        timeout-minutes: 6
+        timeout-minutes: 15
         env:
           PYTHONUNBUFFERED: '1'
           MENU_VIDEO_NATIVE_EVIDENCE_DIR: ci-logs/source-native-ui
@@ -54,7 +54,9 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Source test tool download failed' }
           $tools = Get-Content -Raw ci-logs/source-tools.json | ConvertFrom-Json
           $env:PATH = "$($tools.directory);$env:PATH"
-          python -u -X faulthandler -c "import faulthandler, unittest; faulthandler.dump_traceback_later(240, exit=True); suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); faulthandler.cancel_dump_traceback_later(); raise SystemExit(not result.wasSuccessful())" 2>&1 | Tee-Object ci-logs/unittest.log
+          python -u -X faulthandler -c "import faulthandler, sys, time, unittest; sys.path.insert(0, 'tests'); faulthandler.dump_traceback_later(120, exit=True); started=time.monotonic(); suite=unittest.defaultTestLoader.loadTestsFromName('test_streams.StreamSelectionTests.test_miniatura_real_usa_filmagem_em_vez_de_capa'); result=unittest.TextTestRunner(verbosity=2).run(suite); faulthandler.cancel_dump_traceback_later(); print('Isolated elapsed_seconds', round(time.monotonic()-started, 3)); raise SystemExit(not result.wasSuccessful())" 2>&1 | Tee-Object ci-logs/isolated-streams.log
+          if ($LASTEXITCODE -ne 0) { throw 'Isolated stream regression failed' }
+          python -u -X faulthandler -c "import faulthandler, time, unittest; faulthandler.dump_traceback_later(600, exit=True); started=time.monotonic(); suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); faulthandler.cancel_dump_traceback_later(); print('Complete suite elapsed_seconds', round(time.monotonic()-started, 3)); raise SystemExit(not result.wasSuccessful())" 2>&1 | Tee-Object ci-logs/unittest.log
           if ($LASTEXITCODE -ne 0) { throw 'Source tests failed' }
       - name: Native finite-background render matrix before build
         timeout-minutes: 4

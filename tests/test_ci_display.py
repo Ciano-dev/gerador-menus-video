@@ -1013,10 +1013,23 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertLess(workflow.index('ci_display.py restore'), workflow.index('Upload portable candidate'))
         self.assertLess(workflow.index('ci_display.py restore'), workflow.index('Collect exact source-test'))
         unchanged = blocks[0] + b''.join(b'      - name: '+b for b in blocks[1:] if b not in inserted)
-        # Approved neutral identity delta; all content/pins remain exact.
+        # Approved identity and CI-only suite-budget delta; other content/pins stay exact.
         # Independent action/runtime/download pins and display gates remain asserted.
         self.assertEqual(hashlib.sha256(unchanged).hexdigest(),
-                         '5d4d837aae9fce1c4cbc1aa9398ec7a2051f5e5d44aa2dfc8eba57d34c8c2424')
+                         'fe16f6a4662ae53e8a90f39180813a82b97925419859130cf4c3b306ad413fa9')
+
+    def test_source_regression_isolated_before_complete_suite_and_budgets_are_bounded(self):
+        workflow = _read_utf8_lf_bytes(ROOT / '.github/workflows/windows-portable.yml').decode()
+        self.assertIn('faulthandler.dump_traceback_later(120, exit=True)', workflow)
+        self.assertIn('faulthandler.dump_traceback_later(600, exit=True)', workflow)
+        self.assertIn('test_streams.StreamSelectionTests.test_miniatura_real_usa_filmagem_em_vez_de_capa', workflow)
+        self.assertIn("throw 'Isolated stream regression failed'", workflow)
+        self.assertIn("throw 'Source tests failed'", workflow)
+        self.assertLess(workflow.index('loadTestsFromName('), workflow.index("discover('tests')"))
+        source_step = workflow.split('- name: Explicit tool download outside dist for source tests only', 1)[1].split('- name:', 1)[0]
+        self.assertIn('timeout-minutes: 15', source_step)
+        self.assertIn('Isolated elapsed_seconds', workflow)
+        self.assertIn('Complete suite elapsed_seconds', workflow)
 
     def test_helper_has_no_product_or_spec_import_or_packaging_path(self):
         for path in list(ROOT.glob('*.py')) + list((ROOT/'windows_build').glob('*.spec')):

@@ -3,19 +3,19 @@
   "policy": "client-consented-download",
   "target": "windows-x64",
   "binary": {
-    "version": "ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0",
-    "url": "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-22-13-06/ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0.zip",
-    "sha256": "5a8898e31f2c452062d1f1be475befd8ffba04db11e9f8251da3d10d9a1ae2e5",
-    "size_bytes": 193978038,
-    "ffmpeg_member": "ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0/bin/ffmpeg.exe",
-    "ffprobe_member": "ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0/bin/ffprobe.exe"
+    "version": "ffmpeg-n9.0.2-39-g7adfbe40dc-win64-gpl-9.0",
+    "url": "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autobuild-2026-10-31-12-59/ffmpeg-n9.0.2-39-g7adfbe40dc-win64-gpl-9.0.zip",
+    "sha256": "693f3e224bc184b40524a62ca47526cfebaf2504414021b92fe75f677ad868b9",
+    "size_bytes": 195110184,
+    "ffmpeg_member": "ffmpeg-n9.0.2-39-g7adfbe40dc-win64-gpl-9.0/bin/ffmpeg.exe",
+    "ffprobe_member": "ffmpeg-n9.0.2-39-g7adfbe40dc-win64-gpl-9.0/bin/ffprobe.exe"
   },
   "links": {
-    "supplier": "https://github.com/BtbN/FFmpeg-Builds",
-    "release": "https://github.com/BtbN/FFmpeg-Builds/releases/tag/autobuild-2026-10-22-13-06",
-    "build_scripts": "https://github.com/BtbN/FFmpeg-Builds/tree/937868360a21d711ec94a33f5591d345ad9b7754",
-    "upstream_source": "https://github.com/FFmpeg/FFmpeg/tree/4cf298e66a20dd90e8b7c62333ab5812596835ec",
+    "supplier": "https://github.com/FFmpeg-Builds/FFmpeg-Builds",
+    "release": "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/tag/autobuild-2026-10-31-12-59",
+    "build_scripts": "https://github.com/FFmpeg-Builds/FFmpeg-Builds/tree/5031c6f1082414e53688d39e521849905071070d",
+    "upstream_source": "https://github.com/FFmpeg/FFmpeg/tree/7adfbe40dcde598f93a6963d2f7b22cd75202ccc",
     "license": "https://www.gnu.org/licenses/gpl-3.0.html"
   },
-  "evidence": "Pinned vendor API/checksum metadata supplied by coordinator; archive not downloaded or fully hashed on VPS. Direct supplier download after consent; no FFmpeg binaries in delivery ZIP. This policy does not resolve all legal questions."
+  "evidence": "Vendor monthly snapshot, under its stated two-year month-end retention policy. Coordinator downloaded the complete 195110184-byte archive and verified SHA256 against vendor API digest and ZIP CRC. Direct supplier download only after consent; binaries are not bundled. Fixed URL and hash fail closed if unavailable. Metadata and notices do not certify all redistribution questions."
 }

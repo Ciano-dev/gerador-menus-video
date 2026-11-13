@@ -18,7 +18,7 @@ def app_root():
 def consent_text(root, data=None):
     data = data or client_download.load_manifest()
     links = data['links']
-    return (f'Para criar vídeos, autorize baixar aproximadamente 194 MB pela internet.\n'
+    return (f'Para criar vídeos, autorize baixar aproximadamente 195 MB pela internet.\n'
             f'Destino portátil exato: {root / "tools"}\n'
             'Sem instalação, administrador ou alteração do PATH. O ZIP do aplicativo não inclui '
             'FFmpeg/ffprobe. Os binários serão baixados diretamente do fornecedor após seu consentimento. '
@@ -119,7 +119,7 @@ def prepare_tools(diagnostics, authorize_download=False, smoke=False):
         yes.configure(state='disabled')
         no.configure(state='disabled')
 
-    yes = ttk.Button(buttons, text='Autorizar e baixar 194 MB', command=accept)
+    yes = ttk.Button(buttons, text='Autorizar e baixar 195 MB', command=accept)
     yes.pack(side='left', padx=8)
     no = ttk.Button(buttons, text='Recusar e sair', command=close)
     no.pack(side='left', padx=8)

@@ -5,7 +5,7 @@
 1. Baixe o **pacote Windows** identificado na release. O ZIP do botão **Code** contém o código-fonte, não o programa pronto para abrir.
 2. Extraia **a pasta inteira** do ZIP para uma pasta nova do seu computador. Não execute o programa diretamente de dentro do ZIP.
 3. Dentro da pasta `Gerador-de-Menus`, abra **`Gerador-de-Menus.exe`**.
-4. Na primeira abertura, mantenha a internet conectada. Quando o programa oferecer a preparação das ferramentas de vídeo, clique para aceitar e aguarde terminar. O download é automático, de aproximadamente 194 MB.
+4. Na primeira abertura, mantenha a internet conectada. Quando o programa oferecer a preparação das ferramentas de vídeo, clique para aceitar e aguarde terminar. O download é automático, de aproximadamente 195 MB.
 5. Quando a janela estiver pronta, adicione seus vídeos e faça uma primeira exportação curta. O [guia de uso](GUIA-DE-USO.md) explica os controles.
 
 **Você não precisa procurar nem instalar Python, FFmpeg ou outras ferramentas manualmente.** Python já está incluído. As ferramentas de vídeo são baixadas pelo próprio programa após sua autorização.

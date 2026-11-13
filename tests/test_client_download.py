@@ -183,7 +183,7 @@ class DownloadTests(unittest.TestCase):
         request = urllib.request.Request(valid)
         redirected = self.m.HTTPSRedirect().redirect_request(request, None, 302, 'Found', {}, signed)
         self.assertEqual(redirected.full_url, signed)
-        for url in (signed, valid + '?x=1', valid + '?', valid.replace('2026-10-22', '2026-10-21'), valid.replace('https:', 'http:'),
+        for url in (signed, valid + '?x=1', valid + '?', valid.replace('2026-10-31', '2026-10-30'), valid.replace('https:', 'http:'),
                     valid.replace('github.com', 'hostile.test'), valid.replace('github.com', 'user@github.com'),
                     valid.replace('github.com', 'github.com:444'), valid + '#fragment',
                     'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/tool.zip'):
@@ -197,10 +197,10 @@ class DownloadTests(unittest.TestCase):
 
     def test_pinned_production_metadata(self):
         data = self.m.load_manifest()
-        self.assertEqual(data['binary']['size_bytes'], 193978038)
-        self.assertEqual(data['binary']['sha256'], '5a8898e31f2c452062d1f1be475befd8ffba04db11e9f8251da3d10d9a1ae2e5')
+        self.assertEqual(data['binary']['size_bytes'], 195110184)
+        self.assertEqual(data['binary']['sha256'], '693f3e224bc184b40524a62ca47526cfebaf2504414021b92fe75f677ad868b9')
         self.assertNotIn('approved', data)
-        self.assertIn('937868360a21d711ec94a33f5591d345ad9b7754', data['links']['build_scripts'])
+        self.assertIn('5031c6f1082414e53688d39e521849905071070d', data['links']['build_scripts'])
 
     def test_zip_file_directory_collisions_rejected_in_both_orders(self):
         for entries in ([('a/b', b'x'), ('A', b'y')], [('A', b'y'), ('a/b', b'x')]):

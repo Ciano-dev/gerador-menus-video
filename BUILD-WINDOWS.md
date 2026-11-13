@@ -10,7 +10,7 @@ O build produz `Gerador-de-Menus.zip`, com pasta `Gerador-de-Menus` e `Gerador-d
 
 O ZIP alvo em formato onedir incluirá executável, runtime Python/Tcl/Tk, recursos tipográficos, manifesto de ferramentas e notices de terceiros. Mantém a pasta `_internal`. As oito fontes livres acompanham seus arquivos OFL; Arial não é redistribuída. O usuário Windows não precisa instalar Python ou Tkinter.
 
-FFmpeg e ffprobe não serão embutidos no ZIP. No primeiro uso, o programa pede consentimento uma vez para o download automático de aproximadamente 194 MB do fornecedor fixado no [manifesto](windows_build/client-download-manifest.json). O cache fica em `tools`, junto da pasta do aplicativo, e é verificado por receipt e hashes antes de ser reutilizado. Um cache íntegro anterior continua reutilizável; seu lock legado reconhecido é preservado. Não há alteração do PATH global.
+FFmpeg e ffprobe não serão embutidos no ZIP. No primeiro uso, o programa pede consentimento uma vez para o download automático de aproximadamente 195 MB do fornecedor fixado no [manifesto](windows_build/client-download-manifest.json). O cache fica em `tools`, junto da pasta do aplicativo, e é verificado por receipt e hashes antes de ser reutilizado. Um cache íntegro que corresponda ao manifesto desta versão é reutilizável; seu lock legado reconhecido é preservado. A atualização da versão das ferramentas pode exigir nova preparação consentida, sem apagar caches anteriores. Não há alteração do PATH global.
 
 O fornecedor utiliza uma distribuição FFmpeg GPLv3. O manifesto registra URLs de fornecedor, scripts/fontes, tamanho e hashes. Essa estratégia de download não equivale a uma licença nova para o código autoral.
 

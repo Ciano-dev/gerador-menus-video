@@ -113,6 +113,6 @@ class BootstrapTests(unittest.TestCase):
         bootstrap = importlib.import_module('bootstrap_gui')
         root = Path('/portable')
         text = bootstrap.consent_text(root)
-        for part in ('194 MB', 'internet', str(root / 'tools'), 'administrador', 'PATH', 'ZIP'):
+        for part in ('195 MB', 'internet', str(root / 'tools'), 'administrador', 'PATH', 'ZIP'):
             self.assertIn(part, text)
         self.assertIn('https://', text)

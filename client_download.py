@@ -25,8 +25,8 @@ HOSTS = {'github.com', 'release-assets.githubusercontent.com', 'raw.githubuserco
 LOCK_MARKER = b'MenuVideo client-download lock v1\n'
 # Exact prior marker only; preserve existing locks without exposing private branding.
 LEGACY_LOCK_MARKER_SHA256 = '3b9f1b0e2137b1a494bab737dac538f1036b605664d7e0a92077d52c1d692078'
-PINNED_URL = ('https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-22-13-06/'
-              'ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0.zip')
+PINNED_URL = ('https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autobuild-2026-10-31-12-59/'
+              'ffmpeg-n9.0.2-39-g7adfbe40dc-win64-gpl-9.0.zip')
 
 
 def require(condition, message):

@@ -253,7 +253,7 @@ class NativeSmokeContractTests(unittest.TestCase):
         report = self.valid_result()
         report['frozen'] = True
         bootstrap = {'cache_verified': True, 'downloaded': True, 'download_requests': 1,
-                     'download_bytes': 193978038, 'manifest_sha256': client_download.fingerprint(manifest),
+                     'download_bytes': 195110184, 'manifest_sha256': client_download.fingerprint(manifest),
                      'archive_sha256': manifest['binary']['sha256'], 'ui_heartbeats': 3, 'window_viewable': True}
         report.update(bootstrap=bootstrap, download_authorized=True, network_events=4)
         from test_native_render_checks import complete_case

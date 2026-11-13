@@ -339,11 +339,11 @@ try {
             throw 'Smoke did not run from fresh extraction, foreign cwd and minimal child PATH'
         }
         if (-not $data.bootstrap.cache_verified -or
-            $data.bootstrap.archive_sha256 -ne '5a8898e31f2c452062d1f1be475befd8ffba04db11e9f8251da3d10d9a1ae2e5' -or
+            $data.bootstrap.archive_sha256 -ne '693f3e224bc184b40524a62ca47526cfebaf2504414021b92fe75f677ad868b9' -or
             $data.bootstrap.manifest_sha256 -notmatch '^[0-9a-f]{64}$') { throw 'Verified bootstrap missing' }
         if ($launch -eq 1) {
             if (-not $data.download_authorized -or -not $data.bootstrap.downloaded -or
-                $data.bootstrap.download_requests -ne 1 -or $data.bootstrap.download_bytes -ne 193978038 -or
+                $data.bootstrap.download_requests -ne 1 -or $data.bootstrap.download_bytes -ne 195110184 -or
                 $data.bootstrap.ui_heartbeats -lt 1 -or -not $data.bootstrap.window_viewable -or
                 $data.network_events -lt 1) { throw 'First launch did not perform the authorized real download' }
         } else {

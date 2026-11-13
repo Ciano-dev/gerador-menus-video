@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 import gui_servicos as services
 from gui_autoria import MediaInfo, Project
-import menu_anisio as motor
+import menu_video as motor
 
 
 class FontProjectTests(unittest.TestCase):
@@ -551,7 +551,7 @@ class FontRealRenderTests(unittest.TestCase):
                                 self.assertRaisesRegex(motor.ErroProjeto, 'não cabe.*px'):
                             services.render_project(project, None, output, profile=profile)
                         self.assertFalse(output.exists())
-                        self.assertFalse(list(base.glob('.*anisio*')))
+                        self.assertFalse(list(base.glob('.*menu-video*')))
             self.assertEqual(motor.sha256(source), before)
 
     def test_observed_real_proof_avi_keeps_manual_sizes_and_retains_frame(self):

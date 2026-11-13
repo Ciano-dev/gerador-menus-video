@@ -40,8 +40,8 @@ A existência desses formatos não garante reprodução em qualquer TV. Algumas 
 ## Linha de comando
 
 ```sh
-python menu_anisio.py projeto.menu --saida menu.mp4 --perfil 1080p
-python menu_anisio.py projeto.menu --saida prova.mp4 --perfil prova
+python menu_video.py projeto.menu --saida menu.mp4 --perfil 1080p
+python menu_video.py projeto.menu --saida prova.mp4 --perfil prova
 ```
 
 O perfil `prova` é uma rota técnica de baixa resolução, não um player integrado nem um botão de prévia animada da interface. A extensão deve corresponder ao formato salvo no projeto.

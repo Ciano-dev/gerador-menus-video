@@ -84,7 +84,7 @@ def prepare_tools(diagnostics, authorize_download=False, smoke=False):
     from tkinter import ttk
     root = tk.Tk()
     diagnostics.attach_tk(root)
-    root.title('Gerador de menu não interativo — ferramentas')
+    root.title('Gerador de menus em vídeo')
     root.geometry('760x650')
     session = DownloadSession(root_path, data)
     result = None

@@ -22,7 +22,9 @@ import zipfile
 MAX_EXTRACTED = 1024 * 1024 * 1024
 MAX_ENTRIES = 4096
 HOSTS = {'github.com', 'release-assets.githubusercontent.com', 'raw.githubusercontent.com'}
-LOCK_MARKER = b'Anisio client-download lock v1\n'
+LOCK_MARKER = b'MenuVideo client-download lock v1\n'
+# Exact prior marker only; preserve existing locks without exposing private branding.
+LEGACY_LOCK_MARKER_SHA256 = '3b9f1b0e2137b1a494bab737dac538f1036b605664d7e0a92077d52c1d692078'
 PINNED_URL = ('https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-22-13-06/'
               'ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0.zip')
 
@@ -186,7 +188,9 @@ def tool_lock(root, timeout=120, cancel=None):
                     time.sleep(0.1)
             stream.seek(0)
             marker = stream.read(len(LOCK_MARKER) + 1)
-            require(marker in (b'', LOCK_MARKER), 'Arquivo lock desconhecido; preservado sem alteração.')
+            require(marker in (b'', LOCK_MARKER)
+                    or hashlib.sha256(marker).hexdigest() == LEGACY_LOCK_MARKER_SHA256,
+                    'Arquivo lock desconhecido; preservado sem alteração.')
             if created:
                 stream.seek(0)
                 stream.write(LOCK_MARKER)

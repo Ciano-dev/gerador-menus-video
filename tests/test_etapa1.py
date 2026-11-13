@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import gui_autoria as autoria
 import gui_cores as cores
 import gui_servicos as services
-import menu_anisio as motor
+import menu_video as motor
 import menu_gui as gui
 
 

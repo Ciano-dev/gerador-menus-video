@@ -11,12 +11,12 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import menu_anisio as motor
+import menu_video as motor
 
 
 class RevisionMediaTests(unittest.TestCase):
     def setUp(self):
-        temp = tempfile.TemporaryDirectory(prefix='anisio-revisao-')
+        temp = tempfile.TemporaryDirectory(prefix='menu-video-revisao-')
         self.addCleanup(temp.cleanup)
         self.base = Path(temp.name)
         self.ffmpeg = shutil.which('ffmpeg')

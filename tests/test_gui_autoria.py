@@ -6,7 +6,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from gui_autoria import MediaInfo, Project
-from menu_anisio import ErroProjeto
+from menu_video import ErroProjeto
 
 
 class AuthoringTests(unittest.TestCase):

@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 import gui_servicos as services
-import menu_anisio as motor
+import menu_video as motor
 from gui_autoria import MediaInfo, Project
 
 

@@ -4,13 +4,13 @@ Aplicativo desktop para criar um vídeo de apresentação com pequenas prévias 
 
 ![Exemplo de menu exportado pelo aplicativo](docs/assets/menu-gerado.gif)
 
-*Exemplo realmente exportado pelo programa. As cenas são sintéticas, criadas para a demonstração; não são filmagens de cliente.*
+*Exemplo realmente exportado pelo programa, com três filmagens de natureza licenciadas pelo Pexels. Não são filmagens do cliente. [Fontes das imagens e licença](docs/MIDIAS.md).*
 
 [Ver imagem em resolução completa](docs/assets/menu-gerado.png) · [Ver arquivo MP4 de exemplo](docs/assets/exemplo-menu.mp4)
 
 ## Por que criei este projeto
 
-O projeto nasceu de uma necessidade real: preparar um menu visual para apresentar diferentes partes de uma filmagem, sem montar cada composição manualmente num editor de vídeo.
+Desenvolvi este projeto para atender ao pedido de um cliente que precisava de um menu visual para apresentar diferentes partes de uma filmagem. A proposta era reunir pequenas prévias dos vídeos numa composição personalizada, sem precisar montar cada menu manualmente em um editor de vídeo.
 
 Desenvolvi a solução com apoio de ferramentas de IA. Meu trabalho incluiu entender a necessidade, definir o funcionamento, testar o programa e orientar os ajustes a partir do uso e do retorno recebido.
 
@@ -38,9 +38,14 @@ Na interface, **Aplicar nome e trecho** confirma as mudanças da cena selecionad
 
 ### No Windows
 
-A versão portátil dispensa instalar Python. É preciso extrair a pasta inteira e abrir `Sistema-Menu-Anisio.exe`. Na primeira abertura, o programa pede autorização para baixar as ferramentas de vídeo; depois pode reutilizar o cache verificado sem rede.
+1. Baixe o pacote Windows, quando disponível em [Releases](https://github.com/Ciano-dev/gerador-menus-video/releases).
+2. Extraia **a pasta inteira** do ZIP.
+3. Abra **`Gerador-de-Menus.exe`** dentro da pasta extraída.
+4. Na primeira abertura, aceite o download automático das ferramentas de vídeo e aguarde a preparação terminar.
 
-O pacote do aplicativo é separado do código-fonte. **O ZIP do botão Code não é o programa pronto para abrir.** A publicação do pacote Windows neste repositório ainda está pendente.
+**Não é preciso procurar nem instalar Python ou ferramentas manualmente.** Python já acompanha o aplicativo. A primeira preparação precisa de internet; depois o programa reutiliza as ferramentas salvas na pasta `tools`.
+
+O pacote Windows é separado do código-fonte. **O ZIP do botão Code não é o programa pronto para abrir.** Enquanto não houver um pacote Windows anexado a uma release, o código disponível não substitui esse download.
 
 [Instruções para o pacote Windows](docs/USO-WINDOWS.md)
 
@@ -57,7 +62,7 @@ python menu_gui.py
 Depois de salvar um projeto pela interface, também é possível exportar pela linha de comando:
 
 ```sh
-python menu_anisio.py projeto.menu --saida menu.mp4 --perfil 1080p
+python menu_video.py projeto.menu --saida menu.mp4 --perfil 1080p
 ```
 
 [Guia de uso e cuidados com os arquivos](docs/GUIA-DE-USO.md)
@@ -67,13 +72,13 @@ python menu_anisio.py projeto.menu --saida menu.mp4 --perfil 1080p
 - `menu_gui.py`: janela, controles e interação com o usuário.
 - `gui_autoria.py`: estado do projeto e validação das escolhas.
 - `gui_servicos.py`: leitura, gravação e integração entre interface e processamento.
-- `menu_anisio.py`: composição do menu e exportação com FFmpeg.
+- `menu_video.py`: composição do menu e exportação com FFmpeg.
 - `gui_trabalho.py` e `media_runtime.py`: trabalhos em segundo plano, processos e cancelamento.
 - `font_families.py` e `font_assets/`: catálogo, arquivos e verificação das fontes.
 - `tests/`: testes automatizados, incluindo uso de mídias sintéticas.
 - `windows_build/`: preparação e verificação do pacote Windows.
 
-Mantive os nomes técnicos históricos de alguns arquivos para preservar a versão do aplicativo, mesmo usando um título mais descritivo nesta apresentação.
+Os nomes técnicos atuais seguem a identidade pública do produto. O formato dos projetos `.menu` e as mídias pessoais continuam preservados.
 
 ## Testes e limites
 
@@ -81,7 +86,7 @@ Mantive os nomes técnicos históricos de alguns arquivos para preservar a vers�
 python -B -m unittest discover -s tests -v
 ```
 
-A versão portátil 1.0.3 tem evidências anteriores de execução no Windows, incluindo abertura da interface e exportações com o executável. Essa evidência é diferente dos testes desta seleção de fontes para apresentação.
+A versão portátil histórica 1.0.3 tem evidências anteriores de execução no Windows, mas não substitui a verificação de um novo pacote. Uma distribuição Windows pronta deve ser identificada pela release, pelo hash do arquivo e pela execução correspondente dos testes no Windows.
 
 O programa não promete compatibilidade com toda TV ou todo arquivo de vídeo. A prévia tipográfica da interface é aproximada. A primeira abertura do pacote Windows precisa de rede e consentimento para o download das ferramentas. O código das fontes não foi transformado em uma versão de navegador.
 

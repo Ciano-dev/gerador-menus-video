@@ -12,7 +12,7 @@ import traceback
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from gui_autoria import Project
 import gui_servicos as services
-import menu_anisio as motor
+import menu_video as motor
 from native_render_checks import tool_identity
 
 

@@ -11,11 +11,11 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 
 import menu_gui
-import menu_anisio as motor
+import menu_video as motor
 import gui_servicos as services
 from gui_autoria import MediaInfo, Project
 from gui_trabalho import Worker
-from menu_anisio import ErroProjeto
+from menu_video import ErroProjeto
 from tests.test_gui_janela import Var
 
 

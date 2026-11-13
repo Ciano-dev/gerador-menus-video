@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from gui_cores import ColorPreview, draw_model
-from menu_anisio import animated_layout
+from menu_video import animated_layout
 
 PALETTE = {'fundo': '#112233', 'texto': '#ddeeff', 'destaque': '#ff8800'}
 
@@ -213,7 +213,7 @@ class AdapterTests(unittest.TestCase):
         colors = {key: Var(value) for key, value in PALETTE.items()}
         preview = ColorPreview(canvas, title, colors, lambda: [], font_factory=Font)
         with patch('builtins.open', side_effect=AssertionError('I/O')), \
-             patch('menu_anisio.resolve_tool', side_effect=AssertionError('tool')), \
+             patch('menu_video.resolve_tool', side_effect=AssertionError('tool')), \
              patch('gui_servicos.inspect_media', side_effect=AssertionError('probe')), \
              patch('gui_servicos.render_project', side_effect=AssertionError('render')):
             canvas.flush()
@@ -354,7 +354,7 @@ class RealTkTests(unittest.TestCase):
             seed.edit_scene(0, 'Cena sintética', 0, .2)
             seed.music = services.inspect_media(sources / 'som-sem-video.m4a', audio=True)
             self.app.adopt(seed)
-            evidence = Path(os.environ.get('ANISIO_NATIVE_EVIDENCE_DIR', temporary))
+            evidence = Path(os.environ.get('MENU_VIDEO_NATIVE_EVIDENCE_DIR', temporary))
             evidence.mkdir(parents=True, exist_ok=True)
             report = probe_interface(self.app, evidence / 'source-interface', capture=sys.platform == 'win32')
             validate_interface_report(report, require_captures=sys.platform == 'win32')

@@ -2,15 +2,15 @@
 
 ## O pacote existente e esta seleção de fontes
 
-A versão portátil 1.0.3 já foi construída e exercitada num runner Windows. O pacote associado à apresentação é `Gerador-Menu-Nao-Interativo-1.0.3-Windows-x64.zip`, SHA-256 `e8112ec35699bfb427df5e443bca7a08500eadc9a87dc8f2745d79436231353c`.
+A versão portátil histórica 1.0.3 já foi construída e exercitada num runner Windows. A amostra congelada tem 14 MB e SHA-256 `e8112ec35699bfb427df5e443bca7a08500eadc9a87dc8f2745d79436231353c`. Contém identidades anteriores, está preservada apenas como proveniência e não é download do produto renomeado.
 
-A preparação do portfólio não reconstruiu esse executável. Os módulos do aplicativo, o catálogo de fontes e os scripts de build foram selecionados da mesma fonte congelada. A documentação foi atualizada e os testes foram ajustados para a seleção que não inclui ferramentas antigas de avaliação. Um novo pacote produzido com estes documentos seria outro artefato e precisaria de verificação própria.
+O build produz `Gerador-de-Menus.zip`, com pasta `Gerador-de-Menus` e `Gerador-de-Menus.exe`. A identidade das fontes e scripts foi renomeada; catálogo, fontes tipográficas, dependências e manifesto de download permanecem intactos. Um pacote com essa identidade exige build e verificação próprios no Windows x64; não se obtém apenas trocando o nome do ZIP histórico.
 
 ## Conteúdo do portátil
 
-O ZIP em formato onedir contém executável, runtime Python/Tcl/Tk, recursos tipográficos, manifesto de ferramentas e notices de terceiros. Mantém a pasta `_internal`. As oito fontes livres acompanham seus arquivos OFL; Arial não é redistribuída.
+O ZIP alvo em formato onedir incluirá executável, runtime Python/Tcl/Tk, recursos tipográficos, manifesto de ferramentas e notices de terceiros. Mantém a pasta `_internal`. As oito fontes livres acompanham seus arquivos OFL; Arial não é redistribuída. O usuário Windows não precisa instalar Python ou Tkinter.
 
-FFmpeg e ffprobe não estão no ZIP. Na primeira abertura, o programa pede consentimento para um download de aproximadamente 194 MB do fornecedor fixado no [manifesto](windows_build/client-download-manifest.json). O cache fica em `tools`, junto da pasta do aplicativo, e é verificado por receipt e hashes antes de ser reutilizado. Não há alteração do PATH global.
+FFmpeg e ffprobe não serão embutidos no ZIP. No primeiro uso, o programa pede consentimento uma vez para o download automático de aproximadamente 194 MB do fornecedor fixado no [manifesto](windows_build/client-download-manifest.json). O cache fica em `tools`, junto da pasta do aplicativo, e é verificado por receipt e hashes antes de ser reutilizado. Um cache íntegro anterior continua reutilizável; seu lock legado reconhecido é preservado. Não há alteração do PATH global.
 
 O fornecedor utiliza uma distribuição FFmpeg GPLv3. O manifesto registra URLs de fornecedor, scripts/fontes, tamanho e hashes. Essa estratégia de download não equivale a uma licença nova para o código autoral.
 
@@ -26,7 +26,7 @@ A sequência inclui:
 2. Preparar dependências de build e notices reais de Python/Tcl/Tk/PyInstaller. Ausência ou corrupção desses termos bloqueia o empacotamento.
 3. Preparar o display descartável e as ferramentas para os testes por fontes, fora da distribuição.
 4. Executar os testes, incluindo a matriz de render de mídia finita.
-5. Gerar o bundle com `windows_build/SistemaMenuAnisio.spec` e auditar seus arquivos.
+5. Gerar o bundle com `windows_build/GeradorMenusVideo.spec` e auditar seus arquivos.
 6. Usar `windows_build/smoke_windows.ps1` para extrair uma cópia nova do ZIP e executar duas aberturas reais do executável: preparação inicial com consentimento de download e reabertura offline.
 7. Conferir a integridade do ZIP após os testes e conservar o pacote sem reempacotar a extração usada no smoke.
 
@@ -40,7 +40,7 @@ O código usa a biblioteca padrão do Python. Para testar por fontes, tenha Pyth
 python -B -m unittest discover -s tests -v
 ```
 
-Testes sem desktop não substituem os gates nativos. O spec recusa cross-build Linux: o pacote Windows exige Windows x64 e as dependências de build correspondentes. Não execute um novo workflow apenas para alterar o README se o pacote aceito continua inalterado.
+Testes sem desktop não substituem os gates nativos. O spec recusa cross-build Linux: o pacote Windows exige Windows x64 e as dependências de build correspondentes. A execução manual de CI e o commit associado identificam qual build realmente passou; não use o pacote histórico como substituto da verificação de uma versão renomeada.
 
 ## Limites da evidência
 

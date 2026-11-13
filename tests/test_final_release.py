@@ -44,7 +44,7 @@ class FinalTitleTests(unittest.TestCase):
     def test_engine_centers_measured_block_without_changing_line_advance(self):
         import re
         from unittest.mock import patch
-        import menu_anisio as motor
+        import menu_video as motor
         title = ' '.join(['MMMM'] * 18)
         for profile, factor in [('1080p', 1), ('prova', 1/3)]:
             with tempfile.TemporaryDirectory() as temporary:

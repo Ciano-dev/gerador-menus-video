@@ -114,7 +114,7 @@ raise SystemExit(windows_entry.main([]))
             result = subprocess.run([sys.executable, str(script)], env=env,
                                     capture_output=True, timeout=15)
             self.assertNotEqual(result.returncode, 0)
-            log = root / 'SistemaMenuAnisio' / 'logs' / 'diagnostic.log'
+            log = root / 'GeradorMenusVideo' / 'logs' / 'diagnostic.log'
             self.assertTrue(log.is_file(), result.stderr.decode())
             content = log.read_text(encoding='utf-8')
             self.assertIn('inner-import', content)

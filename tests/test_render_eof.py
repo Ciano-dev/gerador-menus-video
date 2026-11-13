@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-import menu_anisio as motor
+import menu_video as motor
 
 
 class BackgroundEOFTests(unittest.TestCase):

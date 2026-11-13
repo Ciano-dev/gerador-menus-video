@@ -17,7 +17,7 @@ ALT_PALETTE = {'fundo': '#f0e4cc', 'texto': '#192030', 'destaque': '#a52a50'}
 @contextmanager
 def no_media_calls(counter):
     import gui_servicos as services
-    import menu_anisio as motor
+    import menu_video as motor
     saved = []
     def forbidden(*args, **kwargs):
         counter.append('forbidden-media-call')
@@ -577,7 +577,7 @@ def probe_font_families(app, directory, *, capture=False):
     from tkinter import font as tkfont
     import font_families as fonts
     import gui_servicos as services
-    import menu_anisio as motor
+    import menu_video as motor
     from gui_autoria import Project, Scene
     directory = Path(directory); directory.mkdir(parents=True, exist_ok=True)
     original, selected, saved = app.project, app.editing_index, app.saved_state

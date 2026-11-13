@@ -14,7 +14,7 @@ MANIFEST_SHA256 = '3f7b34337bd197858072f05afac19d08c7efc57a7a5416a6db01eb7d29a38
 
 
 def _error(message):
-    from menu_anisio import ErroProjeto
+    from menu_video import ErroProjeto
     return ErroProjeto(message)
 
 

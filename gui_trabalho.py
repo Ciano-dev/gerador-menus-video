@@ -34,7 +34,7 @@ class Worker:
 
         # Sem abandono de cópia/render ao fechar a janela; a UI aguarda sem join bloqueante.
         try:
-            Thread(target=run, name='anisio-autoria', daemon=False).start()
+            Thread(target=run, name='menu-video-autoria', daemon=False).start()
         except Exception:
             self.busy = False
             raise

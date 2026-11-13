@@ -78,7 +78,7 @@ class DisplayError(Exception):
 def require_ci(platform, environment):
     expected = {'GITHUB_ACTIONS': 'true', 'RUNNER_OS': 'Windows',
                 'RUNNER_ENVIRONMENT': 'github-hosted',
-                'ANISIO_CI_RUNNER_ENVIRONMENT': 'github-hosted'}
+                'MENU_VIDEO_CI_RUNNER_ENVIRONMENT': 'github-hosted'}
     if platform != 'win32' or any(environment.get(k) != v for k, v in expected.items()):
         raise DisplayError('ci_guard_denied')
 

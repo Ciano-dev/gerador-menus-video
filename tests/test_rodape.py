@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import menu_anisio as motor
+import menu_video as motor
 
 
 def project_data():
@@ -22,7 +22,7 @@ def project_data():
 class RodapeRenderTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        temp = tempfile.TemporaryDirectory(prefix='anisio-rodape-')
+        temp = tempfile.TemporaryDirectory(prefix='menu-video-rodape-')
         cls.addClassCleanup(temp.cleanup)
         cls.base = Path(temp.name)
         cls.ffmpeg = shutil.which('ffmpeg')
@@ -108,7 +108,7 @@ class RodapeRenderTests(unittest.TestCase):
 
 class RodapeValidationTests(unittest.TestCase):
     def setUp(self):
-        temp = tempfile.TemporaryDirectory(prefix='anisio-rodape-tipos-')
+        temp = tempfile.TemporaryDirectory(prefix='menu-video-rodape-tipos-')
         self.addCleanup(temp.cleanup)
         self.base = Path(temp.name)
         (self.base / 'fonte.mp4').write_bytes(b'validacao anterior a leitura de midia')

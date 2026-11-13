@@ -4,7 +4,7 @@ import re
 import tkinter as tk
 from tkinter import font as tkfont
 
-from menu_anisio import ErroProjeto, animated_layout, fit_text_pixels
+from menu_video import ErroProjeto, animated_layout, fit_text_pixels
 
 DEFAULT_COLORS = {'fundo': '#101f33', 'texto': '#f3ead6', 'destaque': '#c7a362'}
 

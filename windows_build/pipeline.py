@@ -22,7 +22,7 @@ TCL_TERMS_URL = 'https://raw.githubusercontent.com/python/cpython-bin-deps/5a51b
 TCL_TERMS_SHA256 = '41613eabfc08921a7da9c4bfd7f3ce5d5406f55214b253d89f392ed86eebeb8f'
 TCL_TERMS_SIZE = 2295
 REQUIRED_FILES = (
-    'Sistema-Menu-Anisio.exe', '_internal/windows_build/client-download-manifest.json',
+    'Gerador-de-Menus.exe', '_internal/windows_build/client-download-manifest.json',
     '_internal/README.md', '_internal/BUILD-WINDOWS.md',
     '_internal/notices/runtime/Python-LICENSE.txt',
     '_internal/notices/runtime/Tcl-license.terms', '_internal/notices/runtime/Tk-license.terms',
@@ -97,7 +97,7 @@ def audit_names(files, directories=()):
         require(not lowered.endswith(('.ttf', '.otf', '.woff', '.woff2', '.ttc'))
                 or name in {f'_internal/{item}'.casefold() for item in FONT_FILES},
                 'Fonte fora do catálogo fixo no pacote.')
-        require(not lowered.endswith('.exe') or lowered == 'sistema-menu-anisio.exe', 'Executável inesperado no pacote.')
+        require(not lowered.endswith('.exe') or lowered == 'gerador-de-menus.exe', 'Executável inesperado no pacote.')
         require(not lowered.endswith(('.zip', '.7z', '.tar', '.gz', '.xz', '.whl', '.part', '.lock'))
                 or lowered == '_internal/base_library.zip', 'Arquivo de download/fontes no pacote.')
 
@@ -146,7 +146,7 @@ def audit_package(path):
 
 def audit_archive(path):
     files = safe_members(path)
-    prefix = 'Sistema-Menu-Anisio/'
+    prefix = 'Gerador-de-Menus/'
     require(all(name.startswith(prefix) for name in files), 'Raiz inesperada no ZIP final.')
     with __import__('zipfile').ZipFile(path) as archive:
         audit_fonts({name[len(prefix):]: info.file_size for name, info in files.items()},

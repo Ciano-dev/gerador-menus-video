@@ -13,7 +13,7 @@ from gerar_fixtures import generate
 from gui_autoria import Project
 import gui_servicos as services
 from gui_trabalho import Worker
-import menu_anisio as motor
+import menu_video as motor
 
 
 class GuiRenderTests(unittest.TestCase):
@@ -64,7 +64,7 @@ class GuiRenderTests(unittest.TestCase):
         with self.assertRaisesRegex(motor.ErroProjeto, 'existe'):
             motor.export_media(project.title, [], destination, None, 'prova')
         self.assertEqual(digest, motor.sha256(exported))
-        self.assertFalse(list(self.base.glob('.anisio-gui-*')))
+        self.assertFalse(list(self.base.glob('.menu-video-gui-*')))
 
     def test_falha_do_motor_visivel_sem_publicar_pasta_ou_apagar_terceiros(self):
         project = self.project()
@@ -76,7 +76,7 @@ class GuiRenderTests(unittest.TestCase):
                 services.render_project(project, self.base, destination, profile='prova')
         self.assertFalse(destination.exists())
         self.assertEqual(sentinel.read_text(), 'intacto')
-        self.assertFalse(list(self.base.glob('.anisio-gui-*')))
+        self.assertFalse(list(self.base.glob('.menu-video-gui-*')))
         self.assertFalse(list(self.base.glob('.falha*')))
 
     def test_player_recebe_caminho_como_argumento_sem_shell(self):

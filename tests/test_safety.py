@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-import menu_anisio as motor
+import menu_video as motor
 from gerar_fixtures import generate
 from test_real import sha
 
@@ -16,7 +16,7 @@ from test_real import sha
 class SafetyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp = tempfile.TemporaryDirectory(prefix="anisio-safety-", dir=None)
+        cls.temp = tempfile.TemporaryDirectory(prefix="menu-video-safety-", dir=None)
         cls.base = Path(cls.temp.name)
         cls.fixtures = generate(cls.base / "fontes")
         cls.sources = [cls.fixtures / "cores-com-audio.mp4", cls.fixtures / "retrato-mudo.mov"]
@@ -40,7 +40,7 @@ class SafetyTests(unittest.TestCase):
 
     def reject(self, fragment=None):
         result = subprocess.run([
-            sys.executable, str(ROOT / "menu_anisio.py"), str(self.project),
+            sys.executable, str(ROOT / "menu_video.py"), str(self.project),
             "--saida", str(self.output), "--perfil", "prova"],
             capture_output=True, text=True, timeout=30)
         self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
@@ -48,7 +48,7 @@ class SafetyTests(unittest.TestCase):
             self.assertIn(fragment, result.stderr)
         self.assertFalse(self.output.exists())
         self.assertFalse(any(self.base.glob(f".{self.output.name}-*")))
-        self.assertFalse((self.base / f".{self.output.name}.anisio.lock").exists())
+        self.assertFalse((self.base / f".{self.output.name}.menu-video.lock").exists())
 
     def test_arquivo_faltante(self):
         self.project_with("nao-existe.mp4")
@@ -131,7 +131,7 @@ class SafetyTests(unittest.TestCase):
                 motor.export_project(self.project, self.output, "prova")
         self.assertFalse(self.output.exists())
         self.assertFalse(any(self.base.glob(f".{self.output.name}-*")))
-        self.assertFalse((self.base / f".{self.output.name}.anisio.lock").exists())
+        self.assertFalse((self.base / f".{self.output.name}.menu-video.lock").exists())
         self.assertEqual((sentinel / "intacto").read_text(encoding="utf-8"), "intacto")
 
     def test_timeout_e_tratado(self):

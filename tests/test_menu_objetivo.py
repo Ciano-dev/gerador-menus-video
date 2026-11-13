@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import menu_anisio as motor
+import menu_video as motor
 import gui_servicos as services
 from gui_autoria import Project, MediaInfo
 
@@ -269,7 +269,7 @@ class InterfaceConstruidaTests(unittest.TestCase):
         color_variables = list(app.color_vars.values())
         self.assertFalse(any(e.get('textvariable') in color_variables for e in entries))
         self.assertEqual(set(app.color_swatches), {'fundo', 'texto', 'destaque'})
-        self.assertTrue(any(l.get('text') == 'Gerador de menu não interativo' for l in labels))
+        self.assertTrue(any(l.get('text') == 'Gerador de menus em vídeo' for l in labels))
         for caption in ('Hora', 'Min', 'Seg'):
             self.assertEqual(sum(label.get('text') == caption for label in labels), 2)
         scene_variables = [getattr(app, f'scene_{key}_{unit}_var')

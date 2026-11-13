@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 import re
 
-from menu_anisio import ErroProjeto, font_size, numero, texto
+from menu_video import ErroProjeto, font_size, numero, texto
 from font_families import family_id
 
 

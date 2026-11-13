@@ -28,8 +28,8 @@ a = Analysis(
 pyz = PYZ(a.pure)
 exe = EXE(
     pyz, a.scripts, [], exclude_binaries=True,
-    name='Sistema-Menu-Anisio', debug=False, bootloader_ignore_signals=False,
+    name='Gerador-de-Menus', debug=False, bootloader_ignore_signals=False,
     strip=False, upx=False, console=False, disable_windowed_traceback=False,
     contents_directory='_internal',
 )
-coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name='Sistema-Menu-Anisio')
+coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=False, name='Gerador-de-Menus')

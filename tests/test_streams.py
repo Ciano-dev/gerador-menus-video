@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-import menu_anisio as motor
+import menu_video as motor
 import verificar_demo
 from test_real import decode
 
@@ -62,7 +62,7 @@ def create_media(base):
 class StreamSelectionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp = tempfile.TemporaryDirectory(prefix="anisio-streams-", dir=None)
+        cls.temp = tempfile.TemporaryDirectory(prefix="menu-video-streams-", dir=None)
         cls.addClassCleanup(cls.temp.cleanup)
         cls.base = Path(cls.temp.name)
         cls.source, cls.broken = create_media(cls.base / "fontes")

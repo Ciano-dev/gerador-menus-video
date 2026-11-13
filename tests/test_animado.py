@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-import menu_anisio as motor
+import menu_video as motor
 from gerar_fixtures import generate
 
 
@@ -203,7 +203,7 @@ class AnimatedRenderTests(unittest.TestCase):
         import os
         project = self.project()
         output = self.base / 'reservada.mp4'
-        lock = self.base / '.reservada.mp4.anisio.lock'
+        lock = self.base / '.reservada.mp4.menu-video.lock'
         lock.write_text('outro processo', encoding='utf-8')
         with self.assertRaisesRegex(motor.ErroProjeto, 'reservou'):
             motor.export_project(project, output, 'prova')

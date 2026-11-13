@@ -114,14 +114,14 @@ class DenyLegacy(importlib.abc.MetaPathFinder):
         if fullname in ('licensing', 'license_native', 'windows_build.ci_activation'):
             raise AssertionError('current product imports '+fullname)
 sys.meta_path.insert(0, DenyLegacy())
-import menu_gui, menu_anisio, gui_servicos, windows_entry, bootstrap_gui, smoke_windows
+import menu_gui, menu_video, gui_servicos, windows_entry, bootstrap_gui, smoke_windows
 assert not any(n in sys.modules for n in ('licensing', 'license_native'))
-assert menu_anisio.main(sys.argv[1:]) == 0
+assert menu_video.main(sys.argv[1:]) == 0
 print('current runtime imports and real CLI export independent')
 '''
         from gui_autoria import Project
         import gui_servicos as services
-        import menu_anisio as motor
+        import menu_video as motor
         with tempfile.TemporaryDirectory(prefix='isolated-current-product-') as temporary:
             isolated = Path(temporary)
             for source in root.glob('*.py'):
@@ -139,7 +139,7 @@ print('current runtime imports and real CLI export independent')
             project.edit_scene(0, 'Cena', 0, .1)
             saved = services.save_project(project, isolated/'project.menu')
             local = isolated/'localappdata'
-            old = local/'SistemaMenuAnisio/activation/activation.bin'
+            old = local/'LegacyFixture/activation/activation.bin'
             old.parent.mkdir(parents=True)
             previous = b'\x00\xffprevious opaque bytes remain intact'
             old.write_bytes(previous)
@@ -154,7 +154,7 @@ print('current runtime imports and real CLI export independent')
     def test_absent_corrupt_expired_machine_fault_and_clock_rollback_export_preserves_old_bytes(self):
         from gui_autoria import Project
         import gui_servicos as services
-        import menu_anisio as motor
+        import menu_video as motor
         with tempfile.TemporaryDirectory(prefix='no-activation-') as temporary:
             base = Path(temporary)
             source = base / 'source.mp4'
@@ -173,7 +173,7 @@ print('current runtime imports and real CLI export independent')
                 ('clock_rollback', b'previous opaque high-water bytes')]
             for name, old in states:
                 local = base / name
-                state = local / 'SistemaMenuAnisio/activation/activation.bin'
+                state = local / 'LegacyFixture/activation/activation.bin'
                 if old is not None:
                     state.parent.mkdir(parents=True)
                     state.write_bytes(old)
@@ -189,9 +189,9 @@ print('current runtime imports and real CLI export independent')
 
     def test_gui_jobs_and_direct_frozen_smoke_have_no_legacy_gate(self):
         import inspect
-        import menu_gui, menu_anisio, gui_servicos, smoke_windows
+        import menu_gui, menu_video, gui_servicos, smoke_windows
         for callback in (menu_gui.App.make_preview, menu_gui.App.make_export,
-                         menu_anisio.export_project, menu_anisio.export_media,
+                         menu_video.export_project, menu_video.export_media,
                          gui_servicos.preview_project, gui_servicos.render_project, smoke_windows.run_smoke):
             with self.subTest(route=callback.__qualname__):
                 self.assertNotIn('licensing', inspect.getsource(callback))

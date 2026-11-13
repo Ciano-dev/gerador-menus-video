@@ -35,7 +35,7 @@ def decode(path):
 class RealExportTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.temp = tempfile.TemporaryDirectory(prefix="anisio-real-", dir=None)
+        cls.temp = tempfile.TemporaryDirectory(prefix="menu-video-real-", dir=None)
         cls.base = Path(cls.temp.name)
         cls.fixtures = generate(cls.base / "fontes")
 
@@ -51,7 +51,7 @@ class RealExportTests(unittest.TestCase):
         project.write_text(json.dumps({"titulo": title, "cenas": [
             {"arquivo": p.name, "nome": name} for p in sources
         ]}, ensure_ascii=False), encoding="utf-8")
-        import menu_anisio as motor
+        import menu_video as motor
         loaded_title, rows, _ = motor.load_project(project, self.base / "nao-exportar.mp4")
         self.assertEqual(loaded_title, title)
         self.assertEqual([row["source"].resolve() for row in rows],
@@ -60,7 +60,7 @@ class RealExportTests(unittest.TestCase):
         original_hashes = [sha(p) for p in sources]
         output = self.base / "entrega.mp4"
         result = subprocess.run([
-            sys.executable, str(ROOT / "menu_anisio.py"), str(project),
+            sys.executable, str(ROOT / "menu_video.py"), str(project),
             "--saida", str(output), "--perfil", "prova"],
             capture_output=True, text=True, timeout=120)
         self.assertEqual(result.returncode, 0, result.stderr)

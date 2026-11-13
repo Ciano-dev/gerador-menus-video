@@ -162,8 +162,8 @@ def stream_lines(arguments, consume, *, timeout=120, cancel=None):
                 del diagnostic[:-4096]
         except Exception as exc:
             errors.append(exc)
-    readers = [Thread(target=read_stdout, name='anisio-probe-stdout'),
-               Thread(target=read_stderr, name='anisio-probe-stderr')]
+    readers = [Thread(target=read_stdout, name='menu-video-probe-stdout'),
+               Thread(target=read_stderr, name='menu-video-probe-stderr')]
     process = subprocess.Popen(media_arguments(arguments), shell=False,
         stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         **no_console_options())

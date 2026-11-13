@@ -11,7 +11,7 @@ from unittest.mock import Mock, patch
 
 import gui_servicos as services
 from gui_autoria import MediaInfo, Project
-import menu_anisio as motor
+import menu_video as motor
 
 ROOT = Path(__file__).resolve().parents[1]
 IDS = ('arimo', 'montserrat', 'oswald', 'merriweather', 'playfairdisplay', 'cinzel', 'dancingscript', 'lobster')
@@ -509,7 +509,7 @@ class FamilyNativeWindowsTests(unittest.TestCase):
             app=App(tk.Tk()); self.addCleanup(app.shutdown)
             app.project.add_video(services.inspect_media(source));app.refresh(0)
             original,selected=app.project,app.editing_index
-            directory=Path(os.environ.get('ANISIO_NATIVE_EVIDENCE_DIR',tmp))/'font-families'
+            directory=Path(os.environ.get('MENU_VIDEO_NATIVE_EVIDENCE_DIR',tmp))/'font-families'
             report=probe_font_families(app,directory,capture=True)
             validate_family_report(report,require_captures=True)
             self.assertIs(app.project,original);self.assertEqual(app.editing_index,selected)

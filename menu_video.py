@@ -1,4 +1,4 @@
-"""Motor local do Sistema de Menu Anísio; somente biblioteca padrão."""
+"""Motor local do Gerador de menus em vídeo; somente biblioteca padrão."""
 
 import argparse
 from contextlib import nullcontext
@@ -299,7 +299,7 @@ def _export_media(title, scenes, output, settings, profile="1080p", font=None):
     before = {asset['source']: fingerprint(asset['source']) for asset in assets}
     if output.resolve() in before:
         raise ErroProjeto("saída sobre uma fonte")
-    lock_path = output.parent / f".{output.name}.anisio.lock"
+    lock_path = output.parent / f".{output.name}.menu-video.lock"
     try:
         lock = lock_path.open("x", encoding="utf-8")
     except FileExistsError as exc:
@@ -310,7 +310,7 @@ def _export_media(title, scenes, output, settings, profile="1080p", font=None):
         lock.write("Reserva temporária do gerador de menu\n")
         lock.flush()
         with tempfile.TemporaryDirectory(prefix=f".{output.name}-", dir=output.parent) as temp, \
-                tempfile.TemporaryDirectory(prefix="anisio-work-") as scratch:
+                tempfile.TemporaryDirectory(prefix="menu-video-work-") as scratch:
             delivery, work = Path(temp), Path(scratch)
             selected_font = find_font(font)
             if selected_font:
@@ -617,7 +617,7 @@ def run_media(arguments, *, cwd=None, timeout=120, cancel=None, stage=None, prog
     try:
         # Arquivo privado permite ler progresso durante communicate também no Windows,
         # cujas threads de pipe só entregam stdout completo no fim do processo.
-        with (tempfile.TemporaryDirectory(prefix='anisio-progress-') if measured else nullcontext()) as temp:
+        with (tempfile.TemporaryDirectory(prefix='menu-video-progress-') if measured else nullcontext()) as temp:
             on_progress, progress_path = None, None
             if stage is not None:
                 media_runtime.report_progress(stage)
@@ -940,7 +940,7 @@ def render_catalog(ffmpeg, work, delivery, title, scenes, profile, has_font):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Gerador de menu não interativo.")
+    parser = argparse.ArgumentParser(description="Gerador de menus em vídeo.")
     parser.add_argument("projeto", type=Path)
     parser.add_argument("--saida", required=True, type=Path, help="arquivo .mp4 novo; pasta pai existente")
     parser.add_argument("--perfil", choices=("1080p", "prova"), default="1080p")

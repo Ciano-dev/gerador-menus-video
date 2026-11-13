@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 import gui_servicos as services
-import menu_anisio as motor
+import menu_video as motor
 import client_download
 from test_client_download import fixture
 
@@ -32,7 +32,7 @@ class RuntimeTests(unittest.TestCase):
             exe = tools / 'ffprobe.exe'
             before = os.environ.get('PATH')
             with patch.object(sys, 'frozen', True, create=True), \
-                    patch.object(sys, 'executable', str(base / 'Sistema-Menu-Anisio.exe')), \
+                    patch.object(sys, 'executable', str(base / 'Gerador-de-Menus.exe')), \
                     patch.object(client_download, 'load_manifest', return_value=data), \
                     patch('shutil.which', return_value='/host/ffprobe'), \
                     patch.object(motor, 'probe_media', return_value={'streams': [
@@ -46,7 +46,7 @@ class RuntimeTests(unittest.TestCase):
             source = Path(tmp) / 'synthetic.mp4'
             source.touch()
             with patch.object(sys, 'frozen', True, create=True), \
-                    patch.object(sys, 'executable', str(Path(tmp) / 'Sistema-Menu-Anisio.exe')), \
+                    patch.object(sys, 'executable', str(Path(tmp) / 'Gerador-de-Menus.exe')), \
                     patch('shutil.which', return_value='/host/ffprobe'), \
                     patch.object(motor, 'probe_media', return_value={'streams': [
                         {'codec_type': 'video', 'duration': '1'}]}):
@@ -72,7 +72,7 @@ class RuntimeTests(unittest.TestCase):
     def test_frozen_rejects_external_executable_even_low_level(self):
         with tempfile.TemporaryDirectory() as tmp, \
                 patch.object(sys, 'frozen', True, create=True), \
-                patch.object(sys, 'executable', str(Path(tmp) / 'Sistema-Menu-Anisio.exe')), \
+                patch.object(sys, 'executable', str(Path(tmp) / 'Gerador-de-Menus.exe')), \
                 patch.object(motor.subprocess, 'run') as run:
             with self.assertRaisesRegex((RuntimeError, motor.ErroProjeto), 'pacote|empacotad'):
                 motor.run_media(['/host/ffprobe', '-version'])
@@ -87,7 +87,7 @@ class RuntimeHelperTests(unittest.TestCase):
             root = Path(tmp).resolve()
             data, tool_dir = portable_pair(root)
             with patch.object(sys, 'frozen', True, create=True), \
-                    patch.object(sys, 'executable', str(root / 'Sistema-Menu-Anisio.exe')), \
+                    patch.object(sys, 'executable', str(root / 'Gerador-de-Menus.exe')), \
                     patch.object(client_download, 'load_manifest', return_value=data), \
                     patch.object(sys, 'platform', 'win32'), \
                     patch.object(subprocess, 'CREATE_NO_WINDOW', 0x08000000, create=True), \
@@ -116,7 +116,7 @@ class AnimatedSegmentRuntimeTests(unittest.TestCase):
             settings = {'visual': {'fundo': '#101f33', 'texto': '#f3ead6', 'destaque': '#c7a362'},
                         'exibir_rodape': False, 'musica': None, 'segundos': 0.4}
             with patch.object(sys, 'frozen', True, create=True), \
-                    patch.object(sys, 'executable', str(root / 'Sistema-Menu-Anisio.exe')), \
+                    patch.object(sys, 'executable', str(root / 'Gerador-de-Menus.exe')), \
                     patch.object(client_download, 'load_manifest', return_value=data), \
                     patch('shutil.which', return_value='/host/ffprobe'), \
                     patch.object(motor, 'measure_text_pixels', return_value=(24, 8)), \

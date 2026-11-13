@@ -75,7 +75,7 @@ class EOFReportTests(unittest.TestCase):
         self.assertLess(workflow.index('tests/render_eof_matrix.py'), workflow.index('python -m PyInstaller'))
         self.assertNotIn('test_render_eof_matrix.py', workflow)
         source_step = workflow.split('- name: Explicit tool download outside dist for source tests only', 1)[1].split('- name:', 1)[0]
-        self.assertIn('          ANISIO_NATIVE_EVIDENCE_DIR: ci-logs/source-native-ui\n', source_step.split('        run:', 1)[0])
+        self.assertIn('          MENU_VIDEO_NATIVE_EVIDENCE_DIR: ci-logs/source-native-ui\n', source_step.split('        run:', 1)[0])
 
 
     def test_runner_preserves_failure_json(self):

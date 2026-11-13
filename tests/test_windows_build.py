@@ -68,7 +68,7 @@ class BuildContractTests(unittest.TestCase):
         self.assertIn('PyInstaller==6.16.0', (ROOT / 'windows_build/requirements-build.txt').read_text())
 
     def test_spec_collects_notices_manifest_docs_but_no_vendor_binaries(self):
-        content = (ROOT / 'windows_build/SistemaMenuAnisio.spec').read_text()
+        content = (ROOT / 'windows_build/GeradorMenusVideo.spec').read_text()
         for part in ('COLLECT(', 'console=False', 'upx=False', "contents_directory='_internal'",
                      'windows_entry.py', 'binaries=[]', 'client-download-manifest.json', 'README.md'):
             self.assertIn(part, content)
@@ -89,7 +89,7 @@ class BuildContractTests(unittest.TestCase):
 
     def test_tree_and_final_zip_exclude_tools_and_binary_source_archives(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp) / 'Sistema-Menu-Anisio'
+            root = Path(tmp) / 'Gerador-de-Menus'
             module = self.package(root)
             module.audit_package(root)
             for name in ('tools/cache/ffmpeg.exe', '_internal/ffprobe.exe', 'vendor.zip',
@@ -101,7 +101,7 @@ class BuildContractTests(unittest.TestCase):
                 archive = Path(tmp) / 'test-only.zip'
                 with zipfile.ZipFile(archive, 'w') as out:
                     for path in root.rglob('*'):
-                        if path.is_file(): out.write(path, 'Sistema-Menu-Anisio/' + path.relative_to(root).as_posix())
+                        if path.is_file(): out.write(path, 'Gerador-de-Menus/' + path.relative_to(root).as_posix())
                 with self.assertRaises(ValueError): module.audit_archive(archive)
                 extra.unlink()
             # Empty directories left above must be rejected too (tools never belongs in a fresh ZIP).
@@ -109,14 +109,14 @@ class BuildContractTests(unittest.TestCase):
             (root / 'tools').rmdir()
             with zipfile.ZipFile(archive, 'w') as out:
                 for path in root.rglob('*'):
-                    if path.is_file(): out.write(path, 'Sistema-Menu-Anisio/' + path.relative_to(root).as_posix())
+                    if path.is_file(): out.write(path, 'Gerador-de-Menus/' + path.relative_to(root).as_posix())
             module.audit_archive(archive)
 
     def test_no_activation_resources_direct_ci_and_strong_exclusion_audit(self):
         # Contract §5/6 replaces the obsolete public-key/CI activation requirement.
         module = api()
         self.assertNotIn('_internal/issuer-public-key.json', module.REQUIRED_FILES)
-        spec = (ROOT / 'windows_build/SistemaMenuAnisio.spec').read_text(encoding='utf-8')
+        spec = (ROOT / 'windows_build/GeradorMenusVideo.spec').read_text(encoding='utf-8')
         self.assertNotIn("str(root / 'issuer-public-key.json')", spec)
         for excluded in ('licensing', 'license_native', 'windows_build.ci_activation'):
             self.assertIn(repr(excluded), spec)
@@ -131,7 +131,7 @@ class BuildContractTests(unittest.TestCase):
         self.assertNotIn('activation.bin', smoke)
         self.assertNotIn('DPAPI', smoke)
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp) / 'Sistema-Menu-Anisio'
+            root = Path(tmp) / 'Gerador-de-Menus'
             self.package(root)
             module.audit_package(root)
             for name in ('_internal/issuer-private.pem', '_internal/windows_build/ci_activation.py',
@@ -157,7 +157,7 @@ class BuildContractTests(unittest.TestCase):
 
     def test_notices_mandatory_in_tree_and_archive(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp) / 'Sistema-Menu-Anisio'
+            root = Path(tmp) / 'Gerador-de-Menus'
             module = self.package(root)
             (root / '_internal/notices/runtime/Tk-license.terms').unlink()
             with self.assertRaises(ValueError): module.audit_package(root)
@@ -169,7 +169,7 @@ class BuildContractTests(unittest.TestCase):
 
     def test_allowed_python_library_zip_cannot_hide_ffmpeg_or_source_archives(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp) / 'Sistema-Menu-Anisio'
+            root = Path(tmp) / 'Gerador-de-Menus'
             module = self.package(root)
             nested = root / '_internal/base_library.zip'
             for hidden in ('ffmpeg.exe', 'bin/ffprobe.exe', 'sources.zip',

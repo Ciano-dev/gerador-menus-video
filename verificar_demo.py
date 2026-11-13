@@ -6,7 +6,7 @@ import json
 import struct
 import subprocess
 from pathlib import Path
-from menu_anisio import media_duration, input_media_duration, media_timeout, load_project
+from menu_video import media_duration, input_media_duration, media_timeout, load_project
 from media_runtime import resolve_tool, media_arguments, no_console_options
 
 

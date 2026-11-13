@@ -13,7 +13,7 @@ import tempfile
 import uuid
 
 from gui_autoria import MediaInfo, Project, Scene
-import menu_anisio as motor
+import menu_video as motor
 from font_families import family_id
 
 
@@ -149,7 +149,7 @@ def render_project(project, directory, output, *, profile='1080p', progress=lamb
     progress(f'{notice}O vídeo será salvo como “{output.name}”: {output}. Validando mídias e gerando menu…')
     conflict = (f'Já existe outro arquivo ou uma geração usando “{output.name}”. '
                 'Tente exportar novamente para escolher outro nome. Nenhum arquivo foi substituído.')
-    if os.path.lexists(output) or os.path.lexists(output.parent / f'.{output.name}.anisio.lock'):
+    if os.path.lexists(output) or os.path.lexists(output.parent / f'.{output.name}.menu-video.lock'):
         raise motor.ErroProjeto(conflict)
     scenes = [{'source': scene.source.resolve(), 'nome': scene.name,
                'tamanho_fonte': scene.font_size, 'familia_fonte': scene.font_family,

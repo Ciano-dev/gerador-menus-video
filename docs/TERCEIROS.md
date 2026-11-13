@@ -24,4 +24,4 @@ A distribuição portátil conserva os avisos e termos dos componentes Python, T
 
 ## Imagens e demonstração
 
-A captura da interface veio de um teste sintético real da versão 1.0.3 no Windows. O exemplo MP4 e suas imagens derivadas foram exportados pelo motor do aplicativo a partir de cenas geométricas criadas localmente para esta apresentação. Não usam filmagens, nomes de pessoas ou músicas de cliente. O exemplo não contém áudio.
+A captura da interface veio de um teste sintético real da versão 1.0.3 no Windows. O exemplo MP4 e suas imagens derivadas foram exportados pelo motor atual do aplicativo com três filmagens de natureza do Pexels, aprovadas para esta apresentação. São cinco segundos, sem áudio. Não usam filmagens, nomes de pessoas ou músicas do cliente. As fontes e a licença de uso estão em [Filmagens da demonstração](MIDIAS.md).

@@ -129,7 +129,7 @@ def validate_result(data):
 def synthetic_services(directory, progress, scale_seconds=None, *, evidence_directory=None):
     """Executada pelo Worker da própria App; nenhuma chamada de mídia na thread Tk."""
     import gui_servicos as services
-    import menu_anisio as motor
+    import menu_video as motor
     from gui_autoria import Project
 
     ffmpeg, ffprobe = motor.resolve_tool('ffmpeg'), motor.resolve_tool('ffprobe')
@@ -250,7 +250,7 @@ def synthetic_services(directory, progress, scale_seconds=None, *, evidence_dire
 def cancel_then_render(app, directory, project, on_done, on_error):
     """Harness compartilhado por fontes/frozen: filhos reais e botão na thread Tk."""
     import gui_servicos as services
-    import menu_anisio as motor
+    import menu_video as motor
     directory = Path(directory)
     directory.mkdir()
     main_thread = threading.get_ident()
@@ -386,7 +386,7 @@ def run_smoke(report_path, diagnostics, smoke_download=False, scale_seconds=None
                 raise ValueError('Bootstrap do smoke não foi concluído.')
         import tkinter as tk
         from menu_gui import App
-        with tempfile.TemporaryDirectory(prefix='anisio-smoke-') as temporary:
+        with tempfile.TemporaryDirectory(prefix='menu-video-smoke-') as temporary:
             root = tk.Tk()
             diagnostics.attach_tk(root)
             root.bind('<Map>', lambda event: data['window'].__setitem__(

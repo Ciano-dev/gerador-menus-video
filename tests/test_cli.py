@@ -9,12 +9,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CLI = ROOT / "menu_anisio.py"
+CLI = ROOT / "menu_video.py"
 
 
 class ValidationTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix="anisio-test-", dir=None)
+        self.temp = tempfile.TemporaryDirectory(prefix="menu-video-test-", dir=None)
         self.addCleanup(self.temp.cleanup)
         self.base = Path(self.temp.name)
         self.project = self.base / "projeto.json"

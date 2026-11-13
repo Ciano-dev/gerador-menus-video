@@ -18,7 +18,7 @@ import font_families as families
 from gui_cores import ColorPreview, safe_color
 import gui_servicos as services
 from gui_trabalho import Worker
-from menu_anisio import ErroProjeto, font_size
+from menu_video import ErroProjeto, font_size
 from diagnosticos import report_handled
 from media_runtime import CancellationToken, cancellation_scope, progress_scope, MediaProgress
 
@@ -47,7 +47,7 @@ class App:
         self._cancel_requested = False
         self._close_after_job = False
         self._closed = False
-        root.title('Gerador de menu não interativo')
+        root.title('Gerador de menus em vídeo')
         root.configure(background=UI_COLORS['background'])
         root.geometry('1024x720')
         root.minsize(820, 600)
@@ -69,7 +69,7 @@ class App:
     def show_error(self, error):
         self.status_var.set(f'Erro: {error}')
         message = report_handled(error, 'operação da interface')
-        messagebox.showerror('Não foi possível concluir', message, parent=self.root)
+        messagebox.showerror('Gerador de menus em vídeo', message, parent=self.root)
 
     def _button(self, parent, label, command):
         widget = ttk.Button(parent, text=label, command=self.action(command))
@@ -262,7 +262,7 @@ class App:
         self.root.bind('<Button-4>', lambda event: canvas.yview_scroll(-1, 'units'))
         self.root.bind('<Button-5>', lambda event: canvas.yview_scroll(1, 'units'))
         self.root.bind('<FocusIn>', self.ensure_focus_visible, add='+')
-        ttk.Label(body, text='Gerador de menu não interativo', style='Heading.TLabel').pack(anchor='w')
+        ttk.Label(body, text='Gerador de menus em vídeo', style='Heading.TLabel').pack(anchor='w')
         ttk.Label(body, text='Selecione até seis vídeos e gere um menu em vídeo.').pack(
             anchor='w', pady=(2, 12))
         files = ttk.Frame(body)
@@ -820,7 +820,7 @@ class App:
             return
         message = ('O menu continuará sem som após o fim da música.' if visible > track_visible
                    else 'A música será cortada no final do menu.')
-        messagebox.showinfo('Duração do menu', message, parent=self.root)
+        messagebox.showinfo('Gerador de menus em vídeo', message, parent=self.root)
 
     def save_as(self, *, after=None):
         project = self.capture(validate=True)
@@ -847,7 +847,7 @@ class App:
             dirty = self.capture() != self.saved_state
         except ErroProjeto:
             dirty = True
-        return not dirty or messagebox.askyesno('Alterações não salvas',
+        return not dirty or messagebox.askyesno('Gerador de menus em vídeo',
             'Continuar e descartar as alterações não salvas deste projeto?', parent=self.root)
 
     def new_project(self):
@@ -885,7 +885,7 @@ class App:
             return True
         if getattr(self, '_confirmed_duration', None) == visible:
             return True
-        if not messagebox.askyesno('Menu longo',
+        if not messagebox.askyesno('Gerador de menus em vídeo',
                 f'O menu terá {self.format_time(duration)} e poderá levar mais tempo para gerar. Deseja continuar?',
                 parent=self.root):
             return False
@@ -1059,10 +1059,10 @@ class App:
             if self._close_after_job:
                 return
             if self._cancel_token is None:
-                messagebox.showinfo('Operação em andamento',
+                messagebox.showinfo('Gerador de menus em vídeo',
                     'Aguarde o trabalho terminar antes de fechar. A janela continua respondendo.',
                     parent=self.root)
-            elif messagebox.askyesno('Cancelar operação e fechar',
+            elif messagebox.askyesno('Gerador de menus em vídeo',
                     'Cancelar a operação e fechar após a limpeza? Alterações não salvas serão confirmadas depois.',
                     parent=self.root):
                 # O diálogo mantém um loop Tk aninhado; poll pode ter terminado

@@ -40,7 +40,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Runtime license gate failed' }
       - name: Prepare disposable hosted Windows display
         env:
-          ANISIO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+          MENU_VIDEO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
         run: |
           python windows_build/ci_display.py prepare --state .ci-display-state.json --metadata ci-logs/display.jsonl
           if ($LASTEXITCODE -ne 0) { throw 'Hosted display preparation failed' }
@@ -48,7 +48,7 @@ jobs:
         timeout-minutes: 6
         env:
           PYTHONUNBUFFERED: '1'
-          ANISIO_NATIVE_EVIDENCE_DIR: ci-logs/source-native-ui
+          MENU_VIDEO_NATIVE_EVIDENCE_DIR: ci-logs/source-native-ui
         run: |
           python windows_build/pipeline.py fetch-tools ci-downloads/source-runtime --consent-download > ci-logs/source-tools.json
           if ($LASTEXITCODE -ne 0) { throw 'Source test tool download failed' }
@@ -65,35 +65,35 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Native EOF matrix failed; inspect matrix.json and command logs' }
       - name: Native Windows onedir build and package audit
         run: |
-          python -m PyInstaller --clean --noconfirm windows_build/SistemaMenuAnisio.spec 2>&1 | Tee-Object ci-logs/pyinstaller.log
+          python -m PyInstaller --clean --noconfirm windows_build/GeradorMenusVideo.spec 2>&1 | Tee-Object ci-logs/pyinstaller.log
           if ($LASTEXITCODE -ne 0) { throw 'PyInstaller failed' }
-          python windows_build/pipeline.py audit dist/Sistema-Menu-Anisio 2>&1 | Tee-Object ci-logs/package-audit.log
+          python windows_build/pipeline.py audit dist/Gerador-de-Menus 2>&1 | Tee-Object ci-logs/package-audit.log
           if ($LASTEXITCODE -ne 0) { throw 'Package audit failed' }
       - name: Fresh extraction; two native visible Tk launches; isolated child PATH
         run: |
-          ./windows_build/smoke_windows.ps1 -PackageDirectory dist/Sistema-Menu-Anisio -LogDirectory ci-logs
+          ./windows_build/smoke_windows.ps1 -PackageDirectory dist/Gerador-de-Menus -LogDirectory ci-logs
       - name: Audit unchanged final ZIP after smoke downloads
         run: |
-          python windows_build/pipeline.py audit-archive ci-output/Sistema-Menu-Anisio.zip 2>&1 | Tee-Object ci-logs/archive-audit.log
+          python windows_build/pipeline.py audit-archive ci-output/Gerador-de-Menus.zip 2>&1 | Tee-Object ci-logs/archive-audit.log
           if ($LASTEXITCODE -ne 0) { throw 'Final archive audit failed' }
       - name: Always restore original hosted Windows display
         if: always()
         env:
-          ANISIO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+          MENU_VIDEO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
         run: |
           python windows_build/ci_display.py restore --state .ci-display-state.json --metadata ci-logs/display.jsonl
           if ($LASTEXITCODE -ne 0) { throw 'Hosted display restoration failed' }
       - name: Upload portable candidate AFTER smoke and all gates
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: sistema-menu-anisio-windows-x64-candidate
-          path: ci-output/Sistema-Menu-Anisio.zip
+          name: gerador-menus-video-windows-x64-candidate
+          path: ci-output/Gerador-de-Menus.zip
           if-no-files-found: error
           retention-days: 5
       - name: Collect exact source-test diagnostics if present
         if: always()
         run: |
-          $diagnostic = Join-Path $env:LOCALAPPDATA 'SistemaMenuAnisio/logs/diagnostic.log'
+          $diagnostic = Join-Path $env:LOCALAPPDATA 'GeradorMenusVideo/logs/diagnostic.log'
           if (Test-Path -LiteralPath $diagnostic) {
             New-Item -ItemType Directory -Force ci-logs | Out-Null
             Copy-Item -LiteralPath $diagnostic -Destination ci-logs/source-diagnostic.log

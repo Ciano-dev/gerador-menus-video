@@ -281,15 +281,15 @@ try {
     $package = (Resolve-Path $PackageDirectory).Path
     $output = Join-Path $pwd 'ci-output'
     New-Item -ItemType Directory -Force $output | Out-Null
-    $zip = Join-Path $output 'Sistema-Menu-Anisio.zip'
+    $zip = Join-Path $output 'Gerador-de-Menus.zip'
     Compress-Archive -Path $package -DestinationPath $zip
     $archiveHash = (Get-FileHash -Algorithm SHA256 $zip).Hash
-    $smokeRoot = Join-Path $env:RUNNER_TEMP ('anisio-smoke-' + [guid]::NewGuid().ToString('N'))
+    $smokeRoot = Join-Path $env:RUNNER_TEMP ('menu-video-smoke-' + [guid]::NewGuid().ToString('N'))
     $extraction = Join-Path $smokeRoot 'fresh-extraction'
     $alienCwd = Join-Path $smokeRoot 'unrelated-cwd'
     New-Item -ItemType Directory -Force $extraction, $alienCwd | Out-Null
     Expand-Archive -Path $zip -DestinationPath $extraction
-    $exe = (Resolve-Path (Join-Path $extraction 'Sistema-Menu-Anisio/Sistema-Menu-Anisio.exe')).Path
+    $exe = (Resolve-Path (Join-Path $extraction 'Gerador-de-Menus/Gerador-de-Menus.exe')).Path
     $localData = Join-Path $smokeRoot 'localappdata'
     New-Item -ItemType Directory -Force $localData | Out-Null
     $launchIds = @()
@@ -450,6 +450,6 @@ try {
     $_ | Out-String | Set-Content (Join-Path $logs 'smoke-orchestrator-error.log')
     throw
 } finally {
-    $diagnostics = if ($localData) { Join-Path $localData 'SistemaMenuAnisio/logs' } else { $null }
+    $diagnostics = if ($localData) { Join-Path $localData 'GeradorMenusVideo/logs' } else { $null }
     if ($diagnostics -and (Test-Path $diagnostics)) { Copy-Item -Recurse $diagnostics (Join-Path $logs 'application-diagnostics') }
 }

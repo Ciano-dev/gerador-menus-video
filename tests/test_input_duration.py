@@ -15,7 +15,7 @@ import time
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import gui_servicos as services
-import menu_anisio as motor
+import menu_video as motor
 
 
 @unittest.skipUnless(shutil.which('ffmpeg') and shutil.which('ffprobe'), 'FFmpeg necessário')
@@ -261,7 +261,7 @@ class InputDurationTests(unittest.TestCase):
                 self.assertTrue(children[-1].stdout.closed and children[-1].stderr.closed)
             for timer in timers:
                 timer.join()
-            self.assertFalse(any(t.name.startswith('anisio-probe-') for t in threading.enumerate()))
+            self.assertFalse(any(t.name.startswith('menu-video-probe-') for t in threading.enumerate()))
             if descriptors is not None:
                 self.assertLessEqual(len(os.listdir('/proc/self/fd')), descriptors)
             measured = motor.input_duration_info(motor.resolve_tool('ffprobe'), source, video, details)

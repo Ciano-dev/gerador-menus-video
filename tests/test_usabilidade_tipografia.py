@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 
 import menu_gui
 from gui_autoria import MediaInfo
-from menu_anisio import ErroProjeto
+from menu_video import ErroProjeto
 from tests import test_gui_janela as window_tests
 
 
@@ -176,7 +176,7 @@ class RealTypographyTests(unittest.TestCase):
     def setUpClass(cls):
         import shutil
         import tempfile
-        import menu_anisio as motor
+        import menu_video as motor
         cls.motor = motor
         temporary = tempfile.TemporaryDirectory(prefix='tipografia-pixels-')
         cls.addClassCleanup(temporary.cleanup)
@@ -312,7 +312,7 @@ class ExplicitIntegerEditTests(unittest.TestCase):
 class PrecisionRoundtripTests(unittest.TestCase):
     def test_one_frame_fractional_source_survives_save_reopen_selection_and_rename(self):
         import tempfile
-        import menu_anisio as motor
+        import menu_video as motor
         import gui_servicos as services
         from gui_autoria import Project
         with tempfile.TemporaryDirectory(prefix='tempos-reabrir-') as temporary:

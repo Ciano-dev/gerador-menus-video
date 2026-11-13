@@ -14,7 +14,7 @@ active = None
 def notify(message):
     if sys.platform == 'win32':
         import ctypes
-        ctypes.windll.user32.MessageBoxW(None, message, 'Gerador de menu não interativo', 0x10)
+        ctypes.windll.user32.MessageBoxW(None, message, 'Gerador de menus em vídeo', 0x10)
     elif sys.stderr is not None:
         print(message, file=sys.stderr)
 
@@ -25,9 +25,9 @@ class Diagnostics:
         self.location_note = ''
         if directory is None:
             if local and Path(local).is_absolute():
-                directory = Path(local) / 'SistemaMenuAnisio' / 'logs'
+                directory = Path(local) / 'GeradorMenusVideo' / 'logs'
             else:
-                directory = Path(tempfile.gettempdir()) / 'SistemaMenuAnisio' / 'logs'
+                directory = Path(tempfile.gettempdir()) / 'GeradorMenusVideo' / 'logs'
                 self.location_note = 'Fallback explícito: LOCALAPPDATA indisponível; logs no temporário.'
         self.path = Path(directory).absolute() / 'diagnostic.log'
         self.max_bytes, self.backups = max_bytes, backups

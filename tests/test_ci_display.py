@@ -16,7 +16,7 @@ from windows_build import ci_display as display
 ROOT = Path(__file__).resolve().parents[1]
 CI = {'GITHUB_ACTIONS': 'true', 'RUNNER_OS': 'Windows',
       'RUNNER_ENVIRONMENT': 'github-hosted',
-      'ANISIO_CI_RUNNER_ENVIRONMENT': 'github-hosted'}
+      'MENU_VIDEO_CI_RUNNER_ENVIRONMENT': 'github-hosted'}
 
 
 def mode(width=1024, height=768, frequency=60):
@@ -82,7 +82,7 @@ class CoreTests(unittest.TestCase):
 
     def test_guard_denies_all_partial_malformed_and_nonwindows_before_backend(self):
         environments = [{}, {**CI, 'RUNNER_ENVIRONMENT': 'self-hosted'},
-                        {**CI, 'ANISIO_CI_RUNNER_ENVIRONMENT': 'self-hosted'}]
+                        {**CI, 'MENU_VIDEO_CI_RUNNER_ENVIRONMENT': 'self-hosted'}]
         for key in CI:
             environments.extend([{k: v for k, v in CI.items() if k != key},
                                  {**CI, key: ''}, {**CI, key: CI[key].upper()},
@@ -1000,7 +1000,7 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertEqual(len(inserted), 2)
         prepare, restore = (block.decode() for block in inserted)
         for block in (prepare, restore):
-            self.assertIn('ANISIO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}', block)
+            self.assertIn('MENU_VIDEO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}', block)
             self.assertIn('if ($LASTEXITCODE -ne 0)', block)
             self.assertIn('--state .ci-display-state.json --metadata ci-logs/display.jsonl', block)
         self.assertIn('if: always()', restore)
@@ -1013,17 +1013,17 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertLess(workflow.index('ci_display.py restore'), workflow.index('Upload portable candidate'))
         self.assertLess(workflow.index('ci_display.py restore'), workflow.index('Collect exact source-test'))
         unchanged = blocks[0] + b''.join(b'      - name: '+b for b in blocks[1:] if b not in inserted)
-        # Contract §6 removes only the three obsolete activation steps.
+        # Approved neutral identity delta; all content/pins remain exact.
         # Independent action/runtime/download pins and display gates remain asserted.
         self.assertEqual(hashlib.sha256(unchanged).hexdigest(),
-                         '9c35364f5b5ce68b0ba2c1183c69f7e778e11218aca931b84d23faf8b42a155d')
+                         '5d4d837aae9fce1c4cbc1aa9398ec7a2051f5e5d44aa2dfc8eba57d34c8c2424')
 
     def test_helper_has_no_product_or_spec_import_or_packaging_path(self):
         for path in list(ROOT.glob('*.py')) + list((ROOT/'windows_build').glob('*.spec')):
             self.assertNotIn('ci_display', path.read_text(encoding='utf-8'), str(path))
-        # Exact approved font collection/audit addition; keep rejecting all other text changes.
-        self.assertEqual(hashlib.sha256(_read_utf8_lf_bytes(ROOT/'windows_build/SistemaMenuAnisio.spec')).hexdigest(),
-                         '93409bb5fb31cdc42e5e2a796c31e13a0d6370e7f07e721a0799f9ecb883afec')
+        # Reviewed name-only spec delta; keep rejecting all other text changes.
+        self.assertEqual(hashlib.sha256(_read_utf8_lf_bytes(ROOT/'windows_build/GeradorMenusVideo.spec')).hexdigest(),
+                         '481b8517d1296af75c186533755309ae6018443952dafb032f1e769ca0a61ab6')
 
 
 class ArtificialTextContractTests(unittest.TestCase):
@@ -1036,7 +1036,7 @@ class ArtificialTextContractTests(unittest.TestCase):
         self.originals = {
             name: (ROOT / name).read_bytes().replace(b'\r\n', b'\n')
             for name in ('.github/workflows/windows-portable.yml',
-                         'windows_build/SistemaMenuAnisio.spec', 'gui_servicos.py')}
+                         'windows_build/GeradorMenusVideo.spec', 'gui_servicos.py')}
         self.contract = WorkflowContractTests()
 
     def checkout(self, newline):
@@ -1078,7 +1078,7 @@ class ArtificialTextContractTests(unittest.TestCase):
             for name, check in (
                     ('.github/workflows/windows-portable.yml',
                      self.contract.test_ci_prepare_restore_order_hosted_context_and_all_original_text),
-                    ('windows_build/SistemaMenuAnisio.spec',
+                    ('windows_build/GeradorMenusVideo.spec',
                      self.contract.test_helper_has_no_product_or_spec_import_or_packaging_path)):
                 for mutation in ('trailing_space', 'lone_cr'):
                     with self.subTest(newline=newline, name=name, mutation=mutation), \

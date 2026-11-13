@@ -271,7 +271,7 @@ class RealTkCancellationTests(unittest.TestCase):
         import tempfile
         import tkinter as tk
         import gui_servicos as services
-        import menu_anisio as motor
+        import menu_video as motor
         import smoke_windows
         from gui_autoria import Project
         try:

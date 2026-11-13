@@ -10,7 +10,7 @@ from unittest.mock import patch
 from gui_autoria import MediaInfo, Project, Scene
 import gui_servicos as services
 import media_runtime as runtime
-import menu_anisio as motor
+import menu_video as motor
 
 
 class PreviewIsolationTests(unittest.TestCase):

@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import media_runtime as runtime
-import menu_anisio as motor
+import menu_video as motor
 
 
 class TokenTests(unittest.TestCase):
@@ -280,7 +280,7 @@ class PipelineTests(unittest.TestCase):
         import gui_servicos as services
         token = runtime.CancellationToken()
         output = self.base / 'lock-substituido.mp4'
-        lock_path = self.base / '.lock-substituido.mp4.anisio.lock'
+        lock_path = self.base / '.lock-substituido.mp4.menu-video.lock'
         def render(*args):
             if os.name == 'nt':
                 # Handle aberto impede substituição no Windows.

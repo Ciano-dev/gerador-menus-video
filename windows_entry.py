@@ -8,7 +8,7 @@ from diagnosticos import Diagnostics
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description='Gerador de menu não interativo')
+    parser = argparse.ArgumentParser(description='Gerador de menus em vídeo')
     parser.add_argument('--smoke-test', action='store_true')
     parser.add_argument('--report', type=Path)
     parser.add_argument('--smoke-download', action='store_true',

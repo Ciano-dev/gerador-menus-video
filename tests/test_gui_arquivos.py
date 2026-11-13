@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from gerar_fixtures import generate
 from gui_autoria import Project
 import gui_servicos as services
-from menu_anisio import ErroProjeto, sha256
+from menu_video import ErroProjeto, sha256
 
 
 class ProjectFilesTests(unittest.TestCase):

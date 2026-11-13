@@ -1,0 +1,5 @@
+# Runtime pins the exact reviewed public-key bytes; disable platform EOL conversion.
+issuer-public-key.json -text
+
+# Preserve approved font and license pins on Windows checkouts.
+font_assets/** -text

@@ -1,0 +1,108 @@
+name: Windows portable candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout reviewed candidate
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - name: Validate pinned client-download metadata before dependencies
+        run: |
+          New-Item -ItemType Directory -Force ci-logs | Out-Null
+          python windows_build/pipeline.py validate windows_build/client-download-manifest.json 2>&1 | Tee-Object ci-logs/client-manifest.log
+          if ($LASTEXITCODE -ne 0) { throw 'Invalid client-download metadata' }
+      - name: Python 3.13.17 x64
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.13.17'
+          architecture: x64
+      - name: Download and verify pinned direct build wheel, then install on disposable runner
+        run: |
+          python -m pip download --only-binary=:all: --no-deps -r windows_build/requirements-build.txt -d ci-downloads 2>&1 | Tee-Object ci-logs/pip-download.log
+          if ($LASTEXITCODE -ne 0) { throw 'Wheel download failed' }
+          python windows_build/pipeline.py wheel ci-downloads/pyinstaller-6.16.0-py3-none-win_amd64.whl
+          if ($LASTEXITCODE -ne 0) { throw 'Wheel hash failed' }
+          python -m pip install ci-downloads/pyinstaller-6.16.0-py3-none-win_amd64.whl 2>&1 | Tee-Object ci-logs/pip-install.log
+          if ($LASTEXITCODE -ne 0) { throw 'Build dependency installation failed' }
+          python -m pip freeze --all > ci-logs/resolved-build-dependencies.txt
+      - name: Mandatory Python Tcl Tk and PyInstaller notices
+        run: |
+          python windows_build/pipeline.py notices .vendor 2>&1 | Tee-Object ci-logs/runtime-notices.log
+          if ($LASTEXITCODE -ne 0) { throw 'Runtime license gate failed' }
+      - name: Prepare disposable hosted Windows display
+        env:
+          ANISIO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+        run: |
+          python windows_build/ci_display.py prepare --state .ci-display-state.json --metadata ci-logs/display.jsonl
+          if ($LASTEXITCODE -ne 0) { throw 'Hosted display preparation failed' }
+      - name: Explicit tool download outside dist for source tests only
+        timeout-minutes: 6
+        env:
+          PYTHONUNBUFFERED: '1'
+          ANISIO_NATIVE_EVIDENCE_DIR: ci-logs/source-native-ui
+        run: |
+          python windows_build/pipeline.py fetch-tools ci-downloads/source-runtime --consent-download > ci-logs/source-tools.json
+          if ($LASTEXITCODE -ne 0) { throw 'Source test tool download failed' }
+          $tools = Get-Content -Raw ci-logs/source-tools.json | ConvertFrom-Json
+          $env:PATH = "$($tools.directory);$env:PATH"
+          python -u -X faulthandler -c "import faulthandler, unittest; faulthandler.dump_traceback_later(240, exit=True); suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); faulthandler.cancel_dump_traceback_later(); raise SystemExit(not result.wasSuccessful())" 2>&1 | Tee-Object ci-logs/unittest.log
+          if ($LASTEXITCODE -ne 0) { throw 'Source tests failed' }
+      - name: Native finite-background render matrix before build
+        timeout-minutes: 4
+        run: |
+          $tools = Get-Content -Raw ci-logs/source-tools.json | ConvertFrom-Json
+          $env:PATH = "$($tools.directory);$env:PATH"
+          python -u tests/render_eof_matrix.py --portable-root ci-downloads/source-runtime --output ci-logs/render-eof-matrix 2>&1 | Tee-Object ci-logs/render-eof-matrix.log
+          if ($LASTEXITCODE -ne 0) { throw 'Native EOF matrix failed; inspect matrix.json and command logs' }
+      - name: Native Windows onedir build and package audit
+        run: |
+          python -m PyInstaller --clean --noconfirm windows_build/SistemaMenuAnisio.spec 2>&1 | Tee-Object ci-logs/pyinstaller.log
+          if ($LASTEXITCODE -ne 0) { throw 'PyInstaller failed' }
+          python windows_build/pipeline.py audit dist/Sistema-Menu-Anisio 2>&1 | Tee-Object ci-logs/package-audit.log
+          if ($LASTEXITCODE -ne 0) { throw 'Package audit failed' }
+      - name: Fresh extraction; two native visible Tk launches; isolated child PATH
+        run: |
+          ./windows_build/smoke_windows.ps1 -PackageDirectory dist/Sistema-Menu-Anisio -LogDirectory ci-logs
+      - name: Audit unchanged final ZIP after smoke downloads
+        run: |
+          python windows_build/pipeline.py audit-archive ci-output/Sistema-Menu-Anisio.zip 2>&1 | Tee-Object ci-logs/archive-audit.log
+          if ($LASTEXITCODE -ne 0) { throw 'Final archive audit failed' }
+      - name: Always restore original hosted Windows display
+        if: always()
+        env:
+          ANISIO_CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+        run: |
+          python windows_build/ci_display.py restore --state .ci-display-state.json --metadata ci-logs/display.jsonl
+          if ($LASTEXITCODE -ne 0) { throw 'Hosted display restoration failed' }
+      - name: Upload portable candidate AFTER smoke and all gates
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sistema-menu-anisio-windows-x64-candidate
+          path: ci-output/Sistema-Menu-Anisio.zip
+          if-no-files-found: error
+          retention-days: 5
+      - name: Collect exact source-test diagnostics if present
+        if: always()
+        run: |
+          $diagnostic = Join-Path $env:LOCALAPPDATA 'SistemaMenuAnisio/logs/diagnostic.log'
+          if (Test-Path -LiteralPath $diagnostic) {
+            New-Item -ItemType Directory -Force ci-logs | Out-Null
+            Copy-Item -LiteralPath $diagnostic -Destination ci-logs/source-diagnostic.log
+          }
+      - name: Preserve diagnostics, including failure logs (synthetic data only)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: windows-build-diagnostics
+          path: ci-logs/
+          if-no-files-found: warn
+          retention-days: 5

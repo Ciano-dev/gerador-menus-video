@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "policy": "client-consented-download",
+  "target": "windows-x64",
+  "binary": {
+    "version": "ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0",
+    "url": "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-22-13-06/ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0.zip",
+    "sha256": "5a8898e31f2c452062d1f1be475befd8ffba04db11e9f8251da3d10d9a1ae2e5",
+    "size_bytes": 193978038,
+    "ffmpeg_member": "ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0/bin/ffmpeg.exe",
+    "ffprobe_member": "ffmpeg-n9.0.2-33-g4cf298e66a-win64-gpl-9.0/bin/ffprobe.exe"
+  },
+  "links": {
+    "supplier": "https://github.com/BtbN/FFmpeg-Builds",
+    "release": "https://github.com/BtbN/FFmpeg-Builds/releases/tag/autobuild-2026-10-22-13-06",
+    "build_scripts": "https://github.com/BtbN/FFmpeg-Builds/tree/937868360a21d711ec94a33f5591d345ad9b7754",
+    "upstream_source": "https://github.com/FFmpeg/FFmpeg/tree/4cf298e66a20dd90e8b7c62333ab5812596835ec",
+    "license": "https://www.gnu.org/licenses/gpl-3.0.html"
+  },
+  "evidence": "Pinned vendor API/checksum metadata supplied by coordinator; archive not downloaded or fully hashed on VPS. Direct supplier download after consent; no FFmpeg binaries in delivery ZIP. This policy does not resolve all legal questions."
+}

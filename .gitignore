@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.local-evidence/
+build/
+dist/
+.vendor/
+.smoke/
+ci-downloads/
+ci-output/
+ci-logs/

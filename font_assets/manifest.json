@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "families": [
+    {
+      "id": "arimo",
+      "weight": 400,
+      "face": "variable-default",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "arimo/Regular.ttf",
+          "size_bytes": 496268,
+          "sha256": "e43898b143ec826ac8cb4034816458a7047fbe0836558de2a1f8c6223ae3e0ca",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/arimo/Arimo%5Bwght%5D.ttf",
+          "upstream_name": "Arimo[wght].ttf"
+        },
+        {
+          "path": "arimo/OFL.txt",
+          "size_bytes": 4384,
+          "sha256": "11cce536cd2f3864d767003af5dcd739e2e15818cf2279b6175edeadd3960992",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/arimo/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "montserrat",
+      "weight": 400,
+      "face": "static",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "montserrat/Regular.ttf",
+          "size_bytes": 445928,
+          "sha256": "3e8abe50c44c82e2242e97d1ec8c0d385c4890cdc50447bcdb8605c81a38cfb2",
+          "upstream_url": "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Regular.ttf",
+          "upstream_name": "regular.ttf"
+        },
+        {
+          "path": "montserrat/OFL.txt",
+          "size_bytes": 4400,
+          "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/montserrat/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "oswald",
+      "weight": 400,
+      "face": "variable-default",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "oswald/Regular.ttf",
+          "size_bytes": 172088,
+          "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/oswald/Oswald%5Bwght%5D.ttf",
+          "upstream_name": "Oswald[wght].ttf"
+        },
+        {
+          "path": "oswald/OFL.txt",
+          "size_bytes": 4483,
+          "sha256": "0fd731a904b729a4e02eaf5e8ebd06783edd9abe400e8882760160230675b652",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/oswald/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "merriweather",
+      "weight": 400,
+      "face": "static",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "merriweather/Regular.ttf",
+          "size_bytes": 282844,
+          "sha256": "10ec10d1f7a9b5f0eb1a964e06348ce20587d478c661ea36728cce7b57f3de1c",
+          "upstream_url": "https://raw.githubusercontent.com/SorkinType/Merriweather/master/fonts/ttf/Merriweather-Regular.ttf",
+          "upstream_name": "regular.ttf"
+        },
+        {
+          "path": "merriweather/OFL.txt",
+          "size_bytes": 4438,
+          "sha256": "715bd349bfa6116f99e351e1548321dcfa25b91df65502d22ca8d624557697d2",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/merriweather/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "playfairdisplay",
+      "weight": 400,
+      "face": "variable-default",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "playfairdisplay/Regular.ttf",
+          "size_bytes": 300724,
+          "sha256": "c40f2293766a503bc70cce9e512ef844a4ccb7cbcde792fe2ea31d191917d8d6",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf",
+          "upstream_name": "PlayfairDisplay[wght].ttf"
+        },
+        {
+          "path": "playfairdisplay/OFL.txt",
+          "size_bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/playfairdisplay/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "cinzel",
+      "weight": 400,
+      "face": "variable-default",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "cinzel/Regular.ttf",
+          "size_bytes": 125468,
+          "sha256": "f4d83d34d1f6c741193e4acf4b3dff9531e5a67b6aa65228d00a7db72a4e0f34",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/cinzel/Cinzel%5Bwght%5D.ttf",
+          "upstream_name": "Cinzel[wght].ttf"
+        },
+        {
+          "path": "cinzel/OFL.txt",
+          "size_bytes": 4383,
+          "sha256": "f2b3029aba64c378bf0963b62945eee15e564fe4330b934c8f2eb058282b5e83",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/cinzel/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "dancingscript",
+      "weight": 400,
+      "face": "variable-default",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "dancingscript/Regular.ttf",
+          "size_bytes": 133636,
+          "sha256": "21808625578fe8d8cd10cb684be546dca077b27cd03a53a2f1ec11dc743c924c",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/dancingscript/DancingScript%5Bwght%5D.ttf",
+          "upstream_name": "DancingScript[wght].ttf"
+        },
+        {
+          "path": "dancingscript/OFL.txt",
+          "size_bytes": 4443,
+          "sha256": "6f090277c00af96651ce6dbcc38ff1591047a3bffef486e80b6a32e8276a8201",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/dancingscript/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    },
+    {
+      "id": "lobster",
+      "weight": 400,
+      "face": "static",
+      "provenance": "Amostra local aprovada 2026-10-30; bytes preservados, sem download na implementação.",
+      "files": [
+        {
+          "path": "lobster/Regular.ttf",
+          "size_bytes": 406076,
+          "sha256": "d6568e697fd50cedc0be04d8aae4127fe95add607e7bff954ca88604be80c205",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/lobster/Lobster-Regular.ttf",
+          "upstream_name": "Lobster-Regular.ttf"
+        },
+        {
+          "path": "lobster/OFL.txt",
+          "size_bytes": 4430,
+          "sha256": "88aece7d90f2bb7049719f11619a560af22af3451af141f12aa4f46bb157a99b",
+          "upstream_url": "https://raw.githubusercontent.com/google/fonts/6c1dbe27dcf7d817d4b62cec033ba77fa8e2a5ec/ofl/lobster/OFL.txt",
+          "upstream_name": "OFL.txt"
+        }
+      ]
+    }
+  ]
+}

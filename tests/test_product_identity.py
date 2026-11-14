@@ -85,13 +85,17 @@ class ProductIdentityTests(unittest.TestCase):
                     lock.write_bytes(marker)
                     before = lock.stat()
                     with download.tool_lock(root, timeout=1):
-                        self.assertEqual(lock.read_bytes(), marker)
+                        # Keep this read below Windows' mandatory lock at byte 4096.
+                        with lock.open('rb', buffering=0) as stream:
+                            self.assertEqual(stream.read(len(download.LOCK_MARKER) + 1), marker)
                     self.assertEqual(lock.read_bytes(), marker)
                     self.assertEqual((lock.stat().st_ino, lock.stat().st_mtime_ns),
                                      (before.st_ino, before.st_mtime_ns))
             lock.unlink()
             with download.tool_lock(root, timeout=1):
-                self.assertEqual(lock.read_bytes(), download.LOCK_MARKER)
+                with lock.open('rb', buffering=0) as stream:
+                    self.assertEqual(stream.read(len(download.LOCK_MARKER) + 1), download.LOCK_MARKER)
+            self.assertEqual(lock.read_bytes(), download.LOCK_MARKER)
 
     def test_unknown_and_near_legacy_locks_rejected_unchanged(self):
         import client_download as download
